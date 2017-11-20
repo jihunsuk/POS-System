@@ -17,7 +17,7 @@ public class Category {
 		return false;
 	}
 	
-	public boolean modifyCategory(Category c, final String CATEGORY_NAME){
+	public boolean removeCategory(Category c, final String CATEGORY_NAME){
 		
 		return false;
 	}

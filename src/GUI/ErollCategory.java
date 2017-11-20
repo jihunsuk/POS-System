@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ErollCategory {
 
@@ -61,10 +63,18 @@ public class ErollCategory {
 		ctgName.setColumns(10);
 		
 		JButton ok = new JButton("\uD655\uC778");
+		ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		ok.setBounds(104, 145, 97, 23);
 		frame.getContentPane().add(ok);
 		
 		JButton cancle = new JButton("\uCDE8\uC18C");
+		cancle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		cancle.setBounds(213, 145, 97, 23);
 		frame.getContentPane().add(cancle);
 	}

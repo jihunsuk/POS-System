@@ -16,22 +16,6 @@ public class CorrectCategory {
 	private JTextField ctgName;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CorrectCategory window = new CorrectCategory();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public CorrectCategory() {
@@ -43,6 +27,7 @@ public class CorrectCategory {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setVisible(true);
 		frame.setTitle("\uCE74\uD14C\uACE0\uB9AC \uB4F1\uB85D");
 		frame.setBounds(100, 100, 438, 240);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

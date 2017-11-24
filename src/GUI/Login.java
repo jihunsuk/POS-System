@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import DAO.Member;
 
 public class Login {
 
@@ -23,8 +24,7 @@ public class Login {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login window = new Login();
-					window.frame.setVisible(true);
+					new Login();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,6 +44,7 @@ public class Login {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setVisible(true);
 		frame.setTitle("\uD3EC\uC2A4 \uC2DC\uC2A4\uD15C");
 		frame.setBounds(100, 100, 393, 254);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,6 +54,10 @@ public class Login {
 		Login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//로그인 눌렀을 경우
+				boolean login = Member.doLogin(ID.getText(), PWD.getText());
+				if (login == true){
+					
+				} 
 				
 			}
 		});
@@ -63,7 +68,8 @@ public class Login {
 		Membership.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//회원가입 눌렀을 경우
-				
+				new Membership();
+				frame.setVisible(false);
 			}
 		});
 		Membership.setBounds(203, 145, 97, 23);

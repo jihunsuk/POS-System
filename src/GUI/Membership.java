@@ -99,6 +99,7 @@ public class Membership {
 					JOptionPane.showMessageDialog(null, "가입이 완료되었습니다.");
 					new Login();
 					frame.setVisible(false);
+					
 				}
 			}
 		});

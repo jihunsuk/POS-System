@@ -101,6 +101,8 @@ public class ShoppingBasket {
 		JButton ok = new JButton("\uD655\uC778");
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new Home();
+				frame.setVisible(false);
 			}
 		});
 		ok.setBounds(583, 439, 97, 23);

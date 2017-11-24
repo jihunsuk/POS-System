@@ -4,7 +4,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
+import DAO.Member;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -88,6 +92,17 @@ public class Membership {
 		Phone_Number.setColumns(10);
 		
 		JButton Member_Enroll = new JButton("\uAC00\uC785\uD558\uAE30");
+		Member_Enroll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean join = Member.doMembership(ID.getText(), Pwd.getText(), Name.getText(), Age.getText());
+				if (join == true){
+					JOptionPane.showMessageDialog(null, "가입이 완료되었습니다.");
+					new Login();
+					frame.setVisible(false);
+					
+				}
+			}
+		});
 		Member_Enroll.setBounds(112, 198, 97, 23);
 		frame.getContentPane().add(Member_Enroll);
 		

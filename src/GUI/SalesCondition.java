@@ -52,6 +52,8 @@ public class SalesCondition {
 		JButton back = new JButton("\uB4A4\uB85C\uAC00\uAE30");
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new Home();
+				frame.setVisible(false);
 			}
 		});
 		back.setBounds(234, 271, 97, 23);

@@ -1,16 +1,23 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class ManageGoods {
 
 	private JFrame frame;
+	private JTable table;
 
 	/**
 	 * Create the application.
@@ -31,12 +38,9 @@ public class ManageGoods {
 		frame.getContentPane().setLayout(null);
 		
 		JList ctgList = new JList();
-		ctgList.setBounds(12, 48, 148, 492);
+		//ctgList.updateUI();  리스트에변경일어났을 경우 업데이트
+		ctgList.setBounds(12, 51, 148, 492);
 		frame.getContentPane().add(ctgList);
-		
-		JList goodsList = new JList();
-		goodsList.setBounds(172, 48, 271, 492);
-		frame.getContentPane().add(goodsList);
 		
 		JButton ctg_Corret = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp\uC218\uC815</html>");
 		ctg_Corret.addActionListener(new ActionListener() {
@@ -89,9 +93,33 @@ public class ManageGoods {
 		JButton ok = new JButton("\uD655\uC778");
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new Home();
+				frame.setVisible(false);
 			}
 		});
 		ok.setBounds(577, 342, 97, 37);
 		frame.getContentPane().add(ok);
+		
+		String header[] = {"상품명", "가격", "재고수량", "할인율"};
+		String contents[][] = {
+				{"이상현", "100", "1", "99"},
+				{"이상현", "100", "2", "99"}
+		};
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(172, 51, 271, 492);
+		frame.getContentPane().add(scrollPane);
+		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		table.setModel(new DefaultTableModel(contents, header));
+		scrollPane.setViewportView(table);
+		JTableHeader head = table.getTableHeader();
+		head.setBackground(Color.yellow);
+		/*   테이블 추가하는 방법
+		String[] add = {"이상현", "100", "3", "99"};
+		model.addRow(add);
+		*/
+		
+		table.setBounds(172, 48, 271, 492);
 	}
 }

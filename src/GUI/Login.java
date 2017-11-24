@@ -55,10 +55,11 @@ public class Login {
 			public void actionPerformed(ActionEvent e) {
 				//로그인 눌렀을 경우
 				boolean login = Member.doLogin(ID.getText(), PWD.getText());
-				if (login == true){
-					
+				//if (login == true){
+				if(true){
+					new Home();
+					frame.setVisible(false);
 				} 
-				
 			}
 		});
 		Login.setBounds(76, 145, 97, 23);

@@ -19,14 +19,22 @@ public class DBQuery {
 		return dbQuery;
 	}
 
-	public void insertMember(String ID, String PWD, String NAME, int age, String phoneNumber) throws SQLException {
+	public boolean insertMember(String ID, String PWD, String NAME, int age, String phoneNumber) throws SQLException {
 		final String SQL = String.format("insert into Member values('%s','%s','%s','%d','%s')", ID, PWD, NAME, age,
 				phoneNumber);
-
+		boolean res = false;
+		
 		final Statement stmt = c.createStatement();
-		final int isUpdate = stmt.executeUpdate(SQL);
-		System.out.println("res: " + isUpdate);
-
+		try {
+			final int isUpdate = stmt.executeUpdate(SQL);
+			res = true;
+		} catch (Exception e) {
+			/* 중복된 ID의 경우 */
+		}
 		stmt.close();
+		
+		return res;
 	}
+	
+	
 }

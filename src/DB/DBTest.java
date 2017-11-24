@@ -8,7 +8,7 @@ public class DBTest {
 		// TODO Auto-generated method stub
 		DBQuery q = DBQuery.getDBQuery();
 		try {
-			q.insertMember("¾ÆÀÌµğ", "ÆĞ½º¿öµå", "name", 12, "01051803247");
+			q.insertMember("ì•„ì´ë””el", "íŒ¨ìŠ¤ì›Œë“œ", "name", 12, "01051803247");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -21,22 +21,6 @@ public class CorrectGoods {
 	private JTextField ctgName;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CorrectGoods window = new CorrectGoods();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public CorrectGoods() {
@@ -48,6 +32,7 @@ public class CorrectGoods {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setVisible(true);
 		frame.setTitle("\uC0C1\uD488\uC218\uC815");
 		frame.setBounds(100, 100, 455, 305);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

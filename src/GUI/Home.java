@@ -12,22 +12,6 @@ public class Home {
 	private JFrame frame;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Home window = new Home();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public Home() {
@@ -39,6 +23,7 @@ public class Home {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setVisible(true);
 		frame.setTitle("\uD648 \uD654\uBA74");
 		frame.setBounds(100, 100, 448, 182);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

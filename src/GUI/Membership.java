@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Membership {
 
@@ -16,23 +18,7 @@ public class Membership {
 	private JTextField Name;
 	private JTextField Age;
 	private JTextField Phone_Number;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Membership window = new Membership();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the application.
 	 */
@@ -45,6 +31,7 @@ public class Membership {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setVisible(true);
 		frame.setTitle("\uD68C\uC6D0\uAC00\uC785");
 		frame.setBounds(100, 100, 455, 305);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,6 +92,12 @@ public class Membership {
 		frame.getContentPane().add(Member_Enroll);
 		
 		JButton Enroll_Cancle = new JButton("\uAC00\uC785\uCDE8\uC18C");
+		Enroll_Cancle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new Login();
+				frame.setVisible(false);
+			}
+		});
 		Enroll_Cancle.setBounds(237, 198, 97, 23);
 		frame.getContentPane().add(Enroll_Cancle);
 	}

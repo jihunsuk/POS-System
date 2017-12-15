@@ -38,6 +38,7 @@ public class Member {
 				this.Name = rs.getString("NAME");
 				this.Age = rs.getString("AGE");
 				this.PhoneNumber = rs.getString("PHONENUMBER");
+				System.out.println("로그인에 성공하였습니다.");
 				result = true;
 			}
 			
@@ -61,17 +62,19 @@ public class Member {
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
-			result = false;
 			
 			String query = String.format("insert into Member values('%s','%s','%s','%d','%s')", ID, PWD, NAME, AGE,
 					PHONENUMBER);
 			stmt.executeUpdate(query);
-			result = true;
 			
+			System.out.println("회원가입에 성공했습니다.");
+			result = true;
 			stmt.close();
 		} catch (SQLException e) {
-			/* 중복된 ID의 경우 */
 			System.out.println("중복된 ID로 회원가입을 하려고 합니다.");
+			e.printStackTrace();
+		} catch (Exception e) {
+			
 		}
 
 		return result;

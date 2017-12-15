@@ -1,7 +1,11 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import DB.DBConnection;
 
@@ -10,8 +14,8 @@ public class Goods {
 	private int Price, StockAmount;
 	private float Discount;
 	private Category Category;
-	
-	public Goods(String GoodsName, int Price, int StockAmount, float Discount, Category Category){
+
+	public Goods(String GoodsName, int Price, int StockAmount, float Discount, Category Category) {
 		this.GoodsName = GoodsName;
 		this.Price = Price;
 		this.StockAmount = StockAmount;
@@ -19,7 +23,8 @@ public class Goods {
 		this.Category = Category;
 	}
 
-	public boolean addGoods(final String goodsName, final int price, final int stockAmount, final float discount, final String categoryName){
+	public boolean addGoods(final String goodsName, final int price, final int stockAmount, final float discount,
+			final String categoryName) {
 		Connection c = null;
 		Statement stmt = null;
 		boolean result = false;
@@ -28,7 +33,8 @@ public class Goods {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
-			String query = String.format("insert into goods values('%s', '%d', '%d', '%f', '%s')", goodsName, price, stockAmount, discount, categoryName);
+			String query = String.format("insert into goods values('%s', '%d', '%d', '%f', '%s')", goodsName, price,
+					stockAmount, discount, categoryName);
 			stmt.executeUpdate(query);
 
 			System.out.println("상품 추가에 성공했습니다.");
@@ -41,8 +47,9 @@ public class Goods {
 
 		return result;
 	}
-	
-	public boolean modifyGoods(final String prev_goodsName, final String goodsName, final int price, final int stockAmount, final float discount){
+
+	public boolean modifyGoods(final String prev_goodsName, final String goodsName, final int price,
+			final int stockAmount, final float discount) {
 		Connection c = null;
 		Statement stmt = null;
 		boolean result = false;
@@ -51,7 +58,9 @@ public class Goods {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
-			String query = String.format("update goods set goodsName = '%s', price = '%d', discount = '%f', stockAmount = '%d' where goodsName = '%s'", goodsName, price, stockAmount, discount, prev_goodsName);
+			String query = String.format(
+					"update goods set goodsName = '%s', price = '%d', discount = '%f', stockAmount = '%d' where goodsName = '%s'",
+					goodsName, price, stockAmount, discount, prev_goodsName);
 			stmt.executeUpdate(query);
 
 			System.out.println("상품 수정에 성공했습니다.");
@@ -64,8 +73,8 @@ public class Goods {
 
 		return result;
 	}
-	
-	public boolean removeGoods(final String goodsName){
+
+	public boolean removeGoods(final String goodsName) {
 		Connection c = null;
 		Statement stmt = null;
 		boolean result = false;
@@ -87,12 +96,41 @@ public class Goods {
 
 		return result;
 	}
-	
-	public void checkGoodsList(){
-		// TODO: return type -> Goods's List or Array
-		
+
+	public static Goods[] getGoodsList() {
+		Connection c = null;
+		Statement stmt = null;
+		Goods[] goodsList = null;
+
+		try {
+			c = DBConnection.getConnection();
+			stmt = c.createStatement();
+
+			String query = String.format("select * from goods");
+
+			List<Goods> temp = new ArrayList<>();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				String gn = rs.getString("goodsName");
+				int p = rs.getInt("price");
+				int s = rs.getInt("stockamount");
+				int d = rs.getInt("discount");
+				String cn = rs.getString("categoryName");
+				Category ct = new Category(cn);
+
+				temp.add(new Goods(gn, p, s, d, ct));
+			}
+
+			goodsList = temp.toArray(new Goods[0]);
+			System.out.println("상품조회에 성공했습니다.");
+		} catch (SQLException e) {
+			System.out.println("상품조회에 실패했습니다.");
+			e.printStackTrace();
+		}
+
+		return goodsList;
 	}
-	
+
 	public String getGoodsName() {
 		return GoodsName;
 	}
@@ -124,7 +162,7 @@ public class Goods {
 	public void setDiscount(float discount) {
 		Discount = discount;
 	}
-	
+
 	public Category getCategory() {
 		return Category;
 	}

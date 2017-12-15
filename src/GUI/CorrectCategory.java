@@ -53,7 +53,6 @@ public class CorrectCategory {
 		JButton ok = new JButton("\uD655\uC778");
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				//첫번째인자 수정전 카테고리명, 2번째인자 수정후 카테고리명
 				boolean sucess = Category.modifyCategory(correctedName, (String)ctgName.getText());	
 				if(sucess == true){

@@ -17,7 +17,6 @@ public class ErollCategory {
 
 	private JFrame frame;
 	private JTextField ctgName;
-
 	/**
 	 * Create the application.
 	 */
@@ -55,8 +54,11 @@ public class ErollCategory {
 			public void actionPerformed(ActionEvent e) {
 				
 				boolean sucess = Category.addCategory(ctgName.getText());	
-				if(sucess == true)
+				if(sucess == true){
+					ManageGoods.updateCategory();
 					frame.setVisible(false);
+				}
+					
 			}
 		});
 		ok.setBounds(104, 145, 97, 23);

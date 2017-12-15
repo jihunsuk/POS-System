@@ -1,7 +1,6 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.ScrollPane;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -15,7 +14,6 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableModel;
 
 import DAO.Category;
 
@@ -23,8 +21,10 @@ public class ManageGoods {
 
 	private JFrame frame;
 	private JTable table;
-	private Category[] categoryList;
-	
+	private static Category[] categoryList;
+	private static String[] ctgdata = {};
+	private static DefaultListModel<String> dlm = null;
+	private static JList<String> ctgList = new JList<String>();
 	/**
 	 * Create the application.
 	 */
@@ -42,16 +42,11 @@ public class ManageGoods {
 		frame.setBounds(100, 100, 819, 592);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		
-		String[] ctgdata = {"1", "2", "3", "4"};
-		DefaultListModel<String> dlm = new DefaultListModel<String>();
-		for(String s:ctgdata){
-			dlm.addElement(s);
-		}
-		JList ctgList = new JList(dlm);
+			
+		updateCategory();
 		ctgList.setBounds(12, 51, 148, 492);
 		frame.getContentPane().add(ctgList);
+		
 		String header[] = {"상품명", "가격", "재고수량", "할인율"};
 		String contents[][] = {
 				{"이상현", "100", "1", "99"},
@@ -79,9 +74,7 @@ public class ManageGoods {
 		ctg_Eroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ErollCategory();
-				//카테고리 리스트 업데이트
-				categoryList = Category.getCategoryList();
-				System.out.println("test category: " + categoryList[0].getCategoryName());
+				
 			}
 		});
 		ctg_Eroll.setBounds(455, 159, 97, 53);
@@ -176,5 +169,19 @@ public class ManageGoods {
 		});
 		ok.setBounds(577, 342, 97, 37);
 		frame.getContentPane().add(ok);
+	}
+	
+	public static void updateCategory(){
+		categoryList = Category.getCategoryList();
+		ctgdata = new String[categoryList.length];
+		for(int i=0; i<categoryList.length; i++){
+			ctgdata[i] = categoryList[i].getCategoryName();
+		}
+		dlm = new DefaultListModel<String>();
+		for(String s:ctgdata){
+			dlm.addElement(s);
+		}
+		ctgList.setModel(dlm);
+		ctgList.updateUI();
 	}
 }

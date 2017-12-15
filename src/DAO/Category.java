@@ -39,7 +39,7 @@ public class Category {
 		return result;
 	}
 
-	public boolean removeCategory(final String CATEGORY_NAME) {
+	public static boolean removeCategory(final String CATEGORY_NAME) {
 		Connection c = null;
 		Statement stmt = null;
 		boolean result = false;
@@ -62,7 +62,7 @@ public class Category {
 		return result;
 	}
 
-	public boolean modifyCategory(final String PREV_CATEGORY_NAME, final String CATEGORY_NAME) {
+	public static boolean modifyCategory(final String PREV_CATEGORY_NAME, final String CATEGORY_NAME) {
 		Connection c = null;
 		Statement stmt = null;
 		boolean result = false;

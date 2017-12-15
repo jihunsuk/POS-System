@@ -1,35 +1,99 @@
 package DAO;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import DB.DBConnection;
 
 public class ShoppingBasket {
 	private int TotalPrice, ReceiveMoney, Change;
 	// TODO: Amount는 상품별 개수가 되어야 한다. key-value를 통해?
 	private List<Goods> goodsList = new ArrayList<>();
-	private HashMap<Goods, Integer> Amount = new HashMap<>();
+	private HashMap<String, Integer> Amount = new HashMap<>();
 
 	public ShoppingBasket() {
 
 	}
 
-	public boolean addGoods(Goods GOODS) {
-		if (goodsList.contains(GOODS)) {
-			Amount.replace(GOODS, Amount.get(GOODS) + 1);
-		} else {
-			goodsList.add(GOODS);
-			Amount.put(GOODS, 1);
+	public boolean addGoods(String goodsName) {
+		Connection c = null;
+		Statement stmt = null;
+		boolean result = false;
+		
+		try {
+			c = DBConnection.getConnection();
+			stmt = c.createStatement();
+
+			String query = String.format("select * from goods where goodsName = '%s'", goodsName);
+
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next()) {
+				String gn = rs.getString("goodsName");
+				int p = rs.getInt("price");
+				int s = rs.getInt("stockamount");
+				int d = rs.getInt("discount");
+				String cn = rs.getString("categoryName");
+				Category ct = new Category(cn);
+
+				boolean flag = false;
+				for(Goods g : goodsList){
+					if(g.getGoodsName().equals(gn)){
+						// 이미 추가된 상품이면 개수만 늘린다.
+						Amount.replace(goodsName, Amount.get(goodsName) + 1);
+						flag = true;
+						break;
+					}
+				}
+				if(flag == false) {
+					goodsList.add(new Goods(gn, p, s, d, ct));
+					Amount.put(goodsName, 1);
+				}
+				result = true;
+			}
+
+			System.out.println("장바구니상품담기에 성공했습니다.");
+		} catch (SQLException e) {
+			System.out.println("장바구니상품담기에 실패했습니다.");
+			e.printStackTrace();
 		}
 
-		return true;
+		return result;
 	}
 
-	public boolean removeGoods(Goods GOODS) {
-		boolean result = goodsList.remove(GOODS);
-		if(result == true) {
-			Amount.remove(GOODS);
+	public boolean removeGoods(String goodsName) {
+		Connection c = null;
+		Statement stmt = null;
+		boolean result = false;
+		
+		try {
+			c = DBConnection.getConnection();
+			stmt = c.createStatement();
+
+			String query = String.format("select * from goods where goodsName = '%s'", goodsName);
+
+			ResultSet rs = stmt.executeQuery(query);
+			if (rs.next() && rs.getString("goodsName").equals(goodsName)) {
+				for(Goods g : goodsList){
+					if(g.getGoodsName().equals(goodsName)){
+						goodsList.remove(g);
+						Amount.remove(goodsName);
+						result = true;
+						break;
+					}
+				}
+			}
+
+			System.out.println("장바구니상품삭제에 성공했습니다.");
+		} catch (SQLException e) {
+			System.out.println("장바구니상품삭제에 실패했습니다.");
+			e.printStackTrace();
 		}
+
 		return result;
 	}
 
@@ -41,12 +105,8 @@ public class ShoppingBasket {
 		TotalPrice = totalPrice;
 	}
 
-	public int getAmount() {
+	public HashMap<String, Integer> getAmount() {
 		return Amount;
-	}
-
-	public void setAmount(int amount) {
-		Amount = amount;
 	}
 
 	public int getReceiveMoney() {

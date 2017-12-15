@@ -21,7 +21,8 @@ public class ManageGoods {
 
 	private JFrame frame;
 	private JTable table;
-
+	private String[] categoryList;
+	
 	/**
 	 * Create the application.
 	 */

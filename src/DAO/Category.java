@@ -1,19 +1,22 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import DB.DBConnection;
 
 public class Category {
 	private String CategoryName;
 	
-	public Category(){
-		
+	public Category(String CategoryName){
+		this.CategoryName = CategoryName;
 	}
 	
-	public boolean addCategory(final String CATEGORY_NAME){
+	public static boolean addCategory(final String CATEGORY_NAME){
 		Connection c = null;
 		Statement stmt = null;
 		boolean result = false;
@@ -66,6 +69,31 @@ public class Category {
 		return false;
 	}
 
+	public static List<Category> getCategoryList(){
+		Connection c = null;
+		Statement stmt = null;
+		boolean result = false;
+		List<Category> list = new ArrayList<>();
+		try {
+			c = DBConnection.getConnection();
+			stmt = c.createStatement();
+
+			String query = String.format("select * from category");
+
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next()){
+				list.add(new Category(rs.getString("CategoryName")));
+			}
+			System.out.println("카테고리조회에 성공했습니다.");
+			result = true;
+		} catch (SQLException e) {
+			System.out.println("카테고리조회에 실패했습니다.");
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
 	public String getCategoryName() {
 		return CategoryName;
 	}

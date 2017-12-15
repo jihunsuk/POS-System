@@ -6,6 +6,9 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JTextField;
+
+import DAO.*;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -51,9 +54,9 @@ public class ErollCategory {
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-//				boolean sucess = addCategory(ctgName.getText());	
-//				if(sucess == true)
-//					frame.setVisible(false);
+				boolean sucess = Category.addCategory(ctgName.getText());	
+				if(sucess == true)
+					frame.setVisible(false);
 			}
 		});
 		ok.setBounds(104, 145, 97, 23);

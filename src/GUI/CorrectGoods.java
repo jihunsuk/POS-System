@@ -17,11 +17,12 @@ public class CorrectGoods {
 	private JTextField discount;
 	private JTextField stockAmount;
 	private JTextField ctgName;
-
+	private String correctedName;
 	/**
 	 * Create the application.
 	 */
-	public CorrectGoods() {
+	public CorrectGoods(String name) {
+		correctedName= name;
 		initialize();
 	}
 
@@ -95,6 +96,9 @@ public class CorrectGoods {
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				//correctedName <- 수정하기 전 상풍명
+				
+				
 				frame.setVisible(false);
 			}
 		});
@@ -104,7 +108,6 @@ public class CorrectGoods {
 		JButton cancle = new JButton("\uCDE8\uC18C");
 		cancle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				frame.setVisible(false);
 			}
 		});

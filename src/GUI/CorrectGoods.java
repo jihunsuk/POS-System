@@ -2,8 +2,13 @@ package GUI;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import DAO.Goods;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -96,8 +101,14 @@ public class CorrectGoods {
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//correctedName <- 수정하기 전 상풍명
-				
+				boolean sucess = Goods.modifyGoods(correctedName, goodName.getText(), price.getText(), stockAmount.getText(),
+						discount.getText(), ctgName.getText());
+				if(sucess == true){
+					frame.setVisible(false);
+					ManageGoods.updateGoods(ctgName.getText());
+				} else{
+					JOptionPane.showMessageDialog(null, "입력되지 않은 상품 정보가 있습니다.");
+				}
 				
 				frame.setVisible(false);
 			}

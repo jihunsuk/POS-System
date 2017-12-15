@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class CorrectCategory {
@@ -52,11 +53,14 @@ public class CorrectCategory {
 			public void actionPerformed(ActionEvent e) {
 				
 				//첫번째인자 수정전 카테고리명, 2번째인자 수정후 카테고리명
-//				boolean sucess = correctCategory(correctedName, ctgName.getText());	
-//				if(sucess == true)
-//					frame.setVisible(false);
+				boolean sucess = modifyCategory(correctedName, ctgName.getText());	
+				if(sucess == true){
+					ManageGoods.updateCategory();
+					frame.setVisible(false);
+				} else{
+					JOptionPane.showMessageDialog(null, "이미존재하는 카테고리명입니다.");
+				}
 				
-				frame.setVisible(false);
 			}
 		});
 		ok.setBounds(104, 145, 97, 23);

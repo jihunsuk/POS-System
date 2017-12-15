@@ -57,6 +57,8 @@ public class ErollCategory {
 				if(sucess == true){
 					ManageGoods.updateCategory();
 					frame.setVisible(false);
+				} else{
+					JOptionPane.showMessageDialog(null, "이미 존재하는 카테고리명입니다.");
 				}
 					
 			}

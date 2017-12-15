@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -95,9 +96,13 @@ public class ErollGoods {
 		JButton save = new JButton("\uC800\uC7A5");
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-//				boolean sucess = addGoods(goodName.getText(), price.getText(), discount.getText(), stockAmount.getText(), ctgName.getText());
-//				if (sucess == true)
-//					frame.setVisible(false);
+				boolean sucess = Goods.addGoods(goodName.getText(), price.getText(), discount.getText(), stockAmount.getText(), ctgName.getText());
+				if (sucess == true){
+					frame.setVisible(false);
+				}
+				else
+					JOptionPane.showMessageDialog(null, "입력하지 않은 정보가 있습니다.");
+				
 			}
 		});
 		save.setBounds(105, 233, 97, 23);

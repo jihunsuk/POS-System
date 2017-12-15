@@ -16,15 +16,20 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import DAO.Category;
+import DAO.Goods;
 
 public class ManageGoods {
 
 	private JFrame frame;
-	private JTable table;
+	private static JTable table;
 	private static Category[] categoryList;
 	private static String[] ctgdata = {};
 	private static DefaultListModel<String> dlm = null;
 	private static JList<String> ctgList = new JList<String>();
+	private static Goods[] goodsList;
+	private static String[][] goods = {};
+	private static String header[] = {"상품명", "가격", "재고수량", "할인율"};
+	private static DefaultTableModel dtm =  new DefaultTableModel(goods, header);
 	/**
 	 * Create the application.
 	 */
@@ -46,19 +51,13 @@ public class ManageGoods {
 		updateCategory();
 		ctgList.setBounds(12, 51, 148, 492);
 		frame.getContentPane().add(ctgList);
-		
-		String header[] = {"상품명", "가격", "재고수량", "할인율"};
-		String contents[][] = {
-				{"이상현", "100", "1", "99"},
-				{"이상현", "100", "2", "99"}
-		};
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(172, 51, 271, 492);
 		frame.getContentPane().add(scrollPane);
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		DefaultTableModel dtm = new DefaultTableModel(contents, header);
+		
 		table.setModel(dtm);
 		scrollPane.setViewportView(table);
 		JTableHeader head = table.getTableHeader();
@@ -172,4 +171,19 @@ public class ManageGoods {
 		ctgList.setModel(dlm);
 		ctgList.updateUI();
 	}
+	
+	public static void updateGoods(String ctgName){
+		goods = new String[categoryList.length][4];
+		//goodsList = getGoodsList(ctgName);
+		for(int j=0; j<goodsList.length; j++){
+			goods[j][0] = goodsList[j].getGoodsName();
+			goods[j][1] = Integer.toString(goodsList[j].getPrice());
+			goods[j][2] = Integer.toString(goodsList[j].getStockAmount());
+			goods[j][3] = Float.toString(goodsList[j].getDiscount());
+		}
+		dtm = new DefaultTableModel(goods, header);
+		table.setModel(dtm);
+		table.updateUI();
+	}
+	
 }

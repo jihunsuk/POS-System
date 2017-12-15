@@ -63,6 +63,8 @@ public class ShoppingBasket {
 					goodsList.add(new Goods(gn, p, s, d, ct));
 					Amount.put(goodsName, 1);
 				}
+				
+				TotalPrice += p;
 				result = true;
 			}
 
@@ -96,7 +98,9 @@ public class ShoppingBasket {
 				for (Goods g : goodsList) {
 					if (g.getGoodsName().equals(goodsName)) {
 						goodsList.remove(g);
-						Amount.remove(goodsName);
+						int amount = Amount.remove(goodsName);
+						
+						TotalPrice -= amount * g.getPrice();
 						result = true;
 						break;
 					}

@@ -17,6 +17,8 @@ import javax.swing.table.JTableHeader;
 
 import DAO.Category;
 import DAO.Goods;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ManageGoods {
 
@@ -49,6 +51,12 @@ public class ManageGoods {
 		frame.getContentPane().setLayout(null);
 			
 		updateCategory();
+		ctgList.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				updateGoods(ctgList.getSelectedValue());
+			}
+		});
 		ctgList.setBounds(12, 51, 148, 492);
 		frame.getContentPane().add(ctgList);
 
@@ -120,12 +128,12 @@ public class ManageGoods {
 		good_Correct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = table.getSelectedRow();
-				if(index == -1){
-					JOptionPane.showMessageDialog(null, "상품을 선택해주세요.");
-				} else{
-					new CorrectGoods((String)dtm.getValueAt(index, 0));
+				String value = null;
+				if(index != -1){
+					value = (String)dtm.getValueAt(index, 0);
 				}
-				//상품 리스트 업데이트하기
+				new CorrectGoods(value);
+				 
 			}
 		});
 		good_Correct.setBounds(577, 250, 97, 53);
@@ -135,13 +143,13 @@ public class ManageGoods {
 		good_Delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = table.getSelectedRow();
-				
-//				if (index == -1){
-//					JOptionPane.showMessageDialog(null, "상품을 선택해주세요.");
-//				} else{
-//					removeGoods((String)dtm.getValueAt(index, 0));			
-//				}
-//				//상품 리스트 업데이트
+				String value = null;
+				if(index != -1){
+					value = (String)dtm.getValueAt(index, 0);
+				}
+				if (Goods.removeGoods(value)){
+					dtm.removeRow(index);
+				}
 			}
 		});
 		good_Delete.setBounds(697, 250, 97, 53);
@@ -173,8 +181,8 @@ public class ManageGoods {
 	}
 	
 	public static void updateGoods(String ctgName){
-		goods = new String[categoryList.length][4];
-		//goodsList = getGoodsList(ctgName);
+		goods = new String[40][4];
+		goodsList = Goods.getGoodsList(ctgName);
 		for(int j=0; j<goodsList.length; j++){
 			goods[j][0] = goodsList[j].getGoodsName();
 			goods[j][1] = Integer.toString(goodsList[j].getPrice());
@@ -185,5 +193,4 @@ public class ManageGoods {
 		table.setModel(dtm);
 		table.updateUI();
 	}
-	
 }

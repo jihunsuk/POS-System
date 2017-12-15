@@ -1,5 +1,10 @@
 package DAO;
 
+import java.sql.Connection;
+import java.sql.Statement;
+
+import DB.DBConnection;
+
 public class Goods {
 	private String GoodsName;
 	private int Price, StockAmount;
@@ -14,9 +19,27 @@ public class Goods {
 		this.Category = Category;
 	}
 
-	public boolean addGoods(final String goodsName, final int price, final float discount, final int stockAmount){
-		
-		return false;
+	public boolean addGoods(final String goodsName, final int price, final int stockAmount, final float discount, final String categoryName){
+		Connection c = null;
+		Statement stmt = null;
+		boolean result = false;
+
+		try {
+			c = DBConnection.getConnection();
+			stmt = c.createStatement();
+
+			String query = String.format("insert into goods values('%s', '%d', '%d', '%f', '%s')", goodsName, price, stockAmount, discount, categoryName);
+			stmt.executeUpdate(query);
+
+			System.out.println("상품추가에 성공했습니다.");
+			result = true;
+			stmt.close();
+		} catch (Exception e) {
+			System.out.println("상품추가에 실패했습니다.");
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 	
 	public boolean modifyGoods(final String goodsName, final int price, final float discount, final int stockAmount){

@@ -1,7 +1,5 @@
 package GUI;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -96,6 +94,8 @@ public class CorrectGoods {
 		JButton save = new JButton("\uC800\uC7A5");
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				frame.setVisible(false);
 			}
 		});
 		save.setBounds(105, 233, 97, 23);
@@ -104,6 +104,8 @@ public class CorrectGoods {
 		JButton cancle = new JButton("\uCDE8\uC18C");
 		cancle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				frame.setVisible(false);
 			}
 		});
 		cancle.setBounds(246, 233, 97, 23);

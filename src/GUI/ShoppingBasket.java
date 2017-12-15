@@ -1,9 +1,8 @@
 package GUI;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -51,12 +50,14 @@ public class ShoppingBasket {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		addGood.setBounds(517, 317, 97, 23);
+		addGood.setBounds(506, 317, 97, 23);
 		frame.getContentPane().add(addGood);
 		
 		JButton deleteGood = new JButton("\uC0C1\uD488\uC0AD\uC81C");
 		deleteGood.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				//System.out.println(goodsList.getSelectedIndex());
 			}
 		});
 		deleteGood.setBounds(648, 317, 97, 23);
@@ -64,35 +65,41 @@ public class ShoppingBasket {
 		
 		JLabel label = new JLabel("\uCD1D\uAE08\uC561 :");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setBounds(455, 353, 57, 15);
+		label.setBounds(455, 353, 76, 15);
 		frame.getContentPane().add(label);
 		
 		totalPrice = new JTextField();
-		totalPrice.setBounds(517, 350, 116, 21);
+		totalPrice.setBounds(537, 350, 116, 21);
 		frame.getContentPane().add(totalPrice);
 		totalPrice.setColumns(10);
 		
 		JLabel label_1 = new JLabel("\uBC1B\uC740\uAE08\uC561 :");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setBounds(455, 378, 57, 15);
+		label_1.setBounds(455, 378, 76, 15);
 		frame.getContentPane().add(label_1);
 		
 		receivePrice = new JTextField();
 		receivePrice.setColumns(10);
-		receivePrice.setBounds(517, 375, 116, 21);
+		receivePrice.setBounds(537, 375, 116, 21);
 		frame.getContentPane().add(receivePrice);
 		
 		JButton PayforMoney = new JButton("\uD604\uAE08\uACB0\uC81C");
 		PayforMoney.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				new payForMoney();
 			}
 		});
-		PayforMoney.setBounds(517, 406, 97, 23);
+		PayforMoney.setBounds(506, 406, 97, 23);
 		frame.getContentPane().add(PayforMoney);
 		
 		JButton PayForCard = new JButton("\uCE74\uB4DC\uACB0\uC81C");
 		PayForCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(null, "카드결제가 완료되었습니다.");
+				frame.setVisible(false);
+				new Home();
 			}
 		});
 		PayForCard.setBounds(648, 406, 97, 23);
@@ -105,7 +112,7 @@ public class ShoppingBasket {
 				frame.setVisible(false);
 			}
 		});
-		ok.setBounds(583, 439, 97, 23);
+		ok.setBounds(578, 449, 97, 23);
 		frame.getContentPane().add(ok);
 	}
 

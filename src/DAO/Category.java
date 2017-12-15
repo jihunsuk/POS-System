@@ -21,6 +21,11 @@ public class Category {
 		Statement stmt = null;
 		boolean result = false;
 
+		// øπø‹ »Â∏ß E1
+		if(CATEGORY_NAME.equals("")){
+			return result;
+		}
+		
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();

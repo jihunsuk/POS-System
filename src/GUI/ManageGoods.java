@@ -17,11 +17,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
+import DAO.Category;
+
 public class ManageGoods {
 
 	private JFrame frame;
 	private JTable table;
-
+	private Category[] categoryList;
+	
 	/**
 	 * Create the application.
 	 */
@@ -77,6 +80,8 @@ public class ManageGoods {
 			public void actionPerformed(ActionEvent e) {
 				new ErollCategory();
 				//카테고리 리스트 업데이트
+				categoryList = Category.getCategoryList();
+				System.out.println("test category: " + categoryList[0].getCategoryName());
 			}
 		});
 		ctg_Eroll.setBounds(455, 159, 97, 53);

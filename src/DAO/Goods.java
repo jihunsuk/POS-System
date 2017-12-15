@@ -4,6 +4,7 @@ public class Goods {
 	private String GoodsName;
 	private int Price, StockAmount;
 	private float Discount;
+	private Category Category;
 	
 	public Goods(){
 		
@@ -59,5 +60,13 @@ public class Goods {
 
 	public void setDiscount(float discount) {
 		Discount = discount;
+	}
+	
+	public Category getCategory() {
+		return Category;
+	}
+
+	public void setCategory(Category category) {
+		this.Category = category;
 	}
 }

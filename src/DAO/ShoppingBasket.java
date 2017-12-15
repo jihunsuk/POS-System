@@ -66,6 +66,7 @@ public class ShoppingBasket {
 				
 				TotalPrice += p;
 				result = true;
+				// TODO: GUI에서 result = true이면 totalprice변경
 			}
 
 			System.out.println("장바구니상품담기에 성공했습니다.");
@@ -103,6 +104,7 @@ public class ShoppingBasket {
 						TotalPrice -= amount * g.getPrice();
 						result = true;
 						break;
+						// TODO: GUI에서 result = true이면 totalprice변경
 					}
 				}
 			}

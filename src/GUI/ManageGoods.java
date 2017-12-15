@@ -63,10 +63,6 @@ public class ManageGoods {
 		scrollPane.setViewportView(table);
 		JTableHeader head = table.getTableHeader();
 		head.setBackground(Color.yellow);
-		/*   테이블 추가하는 방법
-		String[] add = {"이상현", "100", "3", "99"};
-		model.addRow(add);
-		*/
 		
 		table.setBounds(172, 48, 271, 492);
 		
@@ -74,7 +70,6 @@ public class ManageGoods {
 		ctg_Eroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ErollCategory();
-				
 			}
 		});
 		ctg_Eroll.setBounds(455, 159, 97, 53);
@@ -88,9 +83,8 @@ public class ManageGoods {
 				if (index == -1){
 					JOptionPane.showMessageDialog(null, "카테고리를 선택해주세요.");
 				} else{
-//					String selected = (String) ctgList.getSelectedValue();
-//					new CorrectCategory(selected);
-					//카테고리 리스트 업데이트
+					String selected = (String) ctgList.getSelectedValue();
+					new CorrectCategory(selected);
 				}
 
 				

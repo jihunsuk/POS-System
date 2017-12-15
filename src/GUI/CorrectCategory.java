@@ -60,7 +60,7 @@ public class CorrectCategory {
 					ManageGoods.updateCategory();
 					frame.setVisible(false);
 				} else{
-					JOptionPane.showMessageDialog(null, "이미존재하는 카테고리명입니다.");
+					JOptionPane.showMessageDialog(null, "카테고리를 선택해주세요.");
 				}
 				
 			}

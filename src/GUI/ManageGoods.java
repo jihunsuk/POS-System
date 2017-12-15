@@ -78,13 +78,10 @@ public class ManageGoods {
 		JButton ctg_Corret = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp\uC218\uC815</html>");
 		ctg_Corret.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int index = ctgList.getSelectedIndex();
-				if (index == -1){
-					JOptionPane.showMessageDialog(null, "카테고리를 선택해주세요.");
-				} else{
-					String selected = (String) ctgList.getSelectedValue();
-					new CorrectCategory(selected);
-				}	
+
+				String selected = (String) ctgList.getSelectedValue();
+				new CorrectCategory(selected);
+
 			}
 		});
 		ctg_Corret.setBounds(577, 159, 97, 53);

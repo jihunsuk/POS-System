@@ -31,11 +31,9 @@ public class Category {
 			System.out.println("카테고리 추가에 성공했습니다.");
 			result = true;
 			stmt.close();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			System.out.println("카테고리 추가에 실패했습니다.");
 			e.printStackTrace();
-		} catch (Exception e) {
-
 		}
 
 		return result;
@@ -56,7 +54,7 @@ public class Category {
 			System.out.println("카테고리 삭제에 성공했습니다.");
 			result = true;
 			stmt.close();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			System.out.println("카테고리 삭제에 실패했습니다.");
 			e.printStackTrace();
 		}
@@ -64,15 +62,32 @@ public class Category {
 		return result;
 	}
 
-	public boolean modifyCategory(Category c, final String CATEGORY_NAME) {
+	public boolean modifyCategory(final String PREV_CATEGORY_NAME, final String CATEGORY_NAME) {
+		Connection c = null;
+		Statement stmt = null;
+		boolean result = false;
 
-		return false;
+		try {
+			c = DBConnection.getConnection();
+			stmt = c.createStatement();
+
+			String query = String.format("update category set categoryname = '%s' where categoryname = '%s'", CATEGORY_NAME, PREV_CATEGORY_NAME);
+			stmt.executeUpdate(query);
+
+			System.out.println("카테고리 수정에 성공했습니다.");
+			result = true;
+			stmt.close();
+		} catch (Exception e) {
+			System.out.println("카테고리 수정에 실패했습니다.");
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 
 	public static Category[] getCategoryList() {
 		Connection c = null;
 		Statement stmt = null;
-		boolean result = false;
 		Category[] categoryList = null;
 		
 		try {
@@ -87,11 +102,7 @@ public class Category {
 				temp.add(new Category(rs.getString("CategoryName")));
 			}
 			
-			final int size = temp.size();
-			categoryList = new Category[size];
-			for (int i = 0; i < size; i++) {
-				categoryList[i] = temp.get(i);
-			}
+			categoryList = temp.toArray(new Category[0]);
 			System.out.println("카테고리조회에 성공했습니다.");
 		} catch (SQLException e) {
 			System.out.println("카테고리조회에 실패했습니다.");

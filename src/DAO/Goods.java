@@ -6,8 +6,12 @@ public class Goods {
 	private float Discount;
 	private Category Category;
 	
-	public Goods(){
-		
+	public Goods(String GoodsName, int Price, int StockAmount, float Discount, Category Category){
+		this.GoodsName = GoodsName;
+		this.Price = Price;
+		this.StockAmount = StockAmount;
+		this.Discount = Discount;
+		this.Category = Category;
 	}
 
 	public boolean addGoods(final String goodsName, final int price, final float discount, final int stockAmount){

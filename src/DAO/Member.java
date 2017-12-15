@@ -21,6 +21,7 @@ public class Member {
 		Connection c = null;
 		Statement stmt = null;
 		boolean result = false;
+		
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
@@ -38,12 +39,12 @@ public class Member {
 				this.Name = rs.getString("NAME");
 				this.Age = rs.getString("AGE");
 				this.PhoneNumber = rs.getString("PHONENUMBER");
-				System.out.println("로그인에 성공하였습니다.");
+				System.out.println("로그인에 성공했습니다.");
 				result = true;
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("로그인 예외발생");
+			System.out.println("로그인에 실패했습니다.");
 			e.printStackTrace();
 		}
 
@@ -71,7 +72,7 @@ public class Member {
 			result = true;
 			stmt.close();
 		} catch (SQLException e) {
-			System.out.println("중복된 ID로 회원가입을 하려고 합니다.");
+			System.out.println("회원가입에 실패했습니다.");
 			e.printStackTrace();
 		} catch (Exception e) {
 			

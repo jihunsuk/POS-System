@@ -16,7 +16,7 @@ public class DBConnection {
 			}
 		} catch (Exception e) {
 			System.out.println("DB connection fail!");
-			System.exit(1);
+			e.printStackTrace();
 		}
 		return dbConn;
 	}
@@ -32,7 +32,6 @@ public class DBConnection {
 			dbConn = null;
 		} catch (Exception e) {
 			System.out.println("DB release fail!");
-			System.exit(1);
 		}
 	}
 }

@@ -24,20 +24,21 @@ public class Member {
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
-			result = false;
 
 			String query = String.format("select * from member where ID='%s' and PWD='%s'", ID, PWD);
 
 			ResultSet rs = stmt.executeQuery(query);
 			if (!rs.next() || !rs.getString("ID").equals(ID)) {
-				return false;
+				System.out.println("로그인을 하는데 해당하는 회원이 없습니다.");
+				result = false;
 			}
-			while(rs.next()){
-				if (rs.getString("ID").equals(ID)) {
-					return true;
-				} else {
-					return false;
-				}
+			else {
+				this.ID = ID;
+				this.PWD = PWD;
+				this.Name = rs.getString("NAME");
+				this.Age = rs.getString("AGE");
+				this.PhoneNumber = rs.getString("PHONENUMBER");
+				result = true;
 			}
 			
 		} catch (SQLException e) {

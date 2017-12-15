@@ -23,7 +23,7 @@ public class Category {
 
 		// øπø‹ »Â∏ß E1
 		if(CATEGORY_NAME.equals("")){
-			return result;
+			return false;
 		}
 		
 		try {
@@ -51,7 +51,7 @@ public class Category {
 
 		// øπø‹ »Â∏ß E1
 		if(CATEGORY_NAME.equals("")){
-			return result;
+			return false;
 		}
 		
 		try {
@@ -78,8 +78,8 @@ public class Category {
 		boolean result = false;
 
 		// øπø‹ »Â∏ß E1
-		if(PREV_CATEGORY_NAME.equals("")){
-			return result;
+		if(PREV_CATEGORY_NAME == null){
+			return false;
 		}
 		
 		try {

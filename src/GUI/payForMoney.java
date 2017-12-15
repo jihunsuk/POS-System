@@ -46,7 +46,7 @@ public class payForMoney {
 		rem.setColumns(10);
 		rem.setBounds(183, 91, 116, 21);
 		frame.getContentPane().add(rem);
-		
+		frame.setVisible(true);
 		JButton pay = new JButton("\uACB0\uC81C");
 		pay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

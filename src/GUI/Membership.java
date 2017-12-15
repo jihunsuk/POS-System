@@ -92,7 +92,7 @@ public class Membership {
 		JButton Member_Enroll = new JButton("\uAC00\uC785\uD558\uAE30");
 		Member_Enroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean join = Member.doMembership(ID.getText(), Pwd.getText(), Name.getText(), Age.getText(), Phone_Number.getText());
+				boolean join = Member.doMembership(ID.getText(), Pwd.getText(), Name.getText(), Age.getText());
 				if (join == true){
 					JOptionPane.showMessageDialog(null, "가입이 완료되었습니다.");
 					new Login();

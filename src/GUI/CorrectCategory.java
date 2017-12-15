@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import DAO.*;
+
 public class CorrectCategory {
 
 	private JFrame frame;
@@ -53,7 +55,7 @@ public class CorrectCategory {
 			public void actionPerformed(ActionEvent e) {
 				
 				//첫번째인자 수정전 카테고리명, 2번째인자 수정후 카테고리명
-				boolean sucess = modifyCategory(correctedName, ctgName.getText());	
+				boolean sucess = Category.modifyCategory(correctedName, (String)ctgName.getText());	
 				if(sucess == true){
 					ManageGoods.updateCategory();
 					frame.setVisible(false);

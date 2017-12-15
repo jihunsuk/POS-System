@@ -1,6 +1,8 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.ScrollPane;
+
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -40,6 +42,28 @@ public class ManageGoods {
 		//ctgList.updateUI();  리스트에변경일어났을 경우 업데이트
 		ctgList.setBounds(12, 51, 148, 492);
 		frame.getContentPane().add(ctgList);
+		String header[] = {"상품명", "가격", "재고수량", "할인율"};
+		String contents[][] = {
+				{"이상현", "100", "1", "99"},
+				{"이상현", "100", "2", "99"}
+		};
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(172, 51, 271, 492);
+		frame.getContentPane().add(scrollPane);
+		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		DefaultTableModel dtm = new DefaultTableModel(contents, header);
+		table.setModel(dtm);
+		scrollPane.setViewportView(table);
+		JTableHeader head = table.getTableHeader();
+		head.setBackground(Color.yellow);
+		/*   테이블 추가하는 방법
+		String[] add = {"이상현", "100", "3", "99"};
+		model.addRow(add);
+		*/
+		
+		table.setBounds(172, 48, 271, 492);
 		
 		JButton ctg_Corret = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp\uC218\uC815</html>");
 		ctg_Corret.addActionListener(new ActionListener() {
@@ -80,6 +104,8 @@ public class ManageGoods {
 		JButton ctg_Delete = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp\uC0AD\uC81C</html>;");
 		ctg_Delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
 			}
 		});
 		ctg_Delete.setBounds(697, 159, 97, 53);
@@ -92,7 +118,7 @@ public class ManageGoods {
 				if (index == -1){
 					JOptionPane.showMessageDialog(null, "상품을 선택해주세요.");
 				} else{
-					table.remove(table.getSelectedRow());
+					dtm.removeRow(table.getSelectedRow());				
 				}
 			}
 		});
@@ -108,27 +134,5 @@ public class ManageGoods {
 		});
 		ok.setBounds(577, 342, 97, 37);
 		frame.getContentPane().add(ok);
-		
-		String header[] = {"상품명", "가격", "재고수량", "할인율"};
-		String contents[][] = {
-				{"이상현", "100", "1", "99"},
-				{"이상현", "100", "2", "99"}
-		};
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(172, 51, 271, 492);
-		frame.getContentPane().add(scrollPane);
-		table = new JTable();
-		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		table.setModel(new DefaultTableModel(contents, header));
-		scrollPane.setViewportView(table);
-		JTableHeader head = table.getTableHeader();
-		head.setBackground(Color.yellow);
-		/*   테이블 추가하는 방법
-		String[] add = {"이상현", "100", "3", "99"};
-		model.addRow(add);
-		*/
-		
-		table.setBounds(172, 48, 271, 492);
 	}
 }

@@ -23,17 +23,22 @@ public class Goods {
 		this.Category = Category;
 	}
 
-	public static boolean addGoods(final String goodsName, final int price, final int stockAmount, final float discount,
+	public static boolean addGoods(final String goodsName, final String price, final String stockAmount, final String discount,
 			final String categoryName) {
 		Connection c = null;
 		Statement stmt = null;
 		boolean result = false;
 
+		// 예외 흐름 E1
+		if(goodsName.equals("") || price.equals("") || stockAmount.equals("") || discount.equals("") || categoryName.equals("")){
+			return false;
+		}
+		
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
-			String query = String.format("insert into goods values('%s', '%d', '%d', '%f', '%s')", goodsName, price,
+			String query = String.format("insert into goods values('%s', '%s', '%s', '%s', '%s')", goodsName, price,
 					stockAmount, discount, categoryName);
 			stmt.executeUpdate(query);
 
@@ -48,19 +53,28 @@ public class Goods {
 		return result;
 	}
 
-	public static boolean modifyGoods(final String prev_goodsName, final String goodsName, final int price,
-			final int stockAmount, final float discount) {
+	public static boolean modifyGoods(final String prev_goodsName, final String goodsName, final String price,
+			final String stockAmount, final String discount, final String categoryName) {
 		Connection c = null;
 		Statement stmt = null;
 		boolean result = false;
 
+		// 예외 흐름 E1
+		if(prev_goodsName == null){
+			return false;
+		}
+		// 예외 흐름 E2
+		if(goodsName.equals("") || price.equals("") || stockAmount.equals("") || discount.equals("") || categoryName.equals("")){
+			return false;
+		}
+		
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
 			String query = String.format(
-					"update goods set goodsName = '%s', price = '%d', discount = '%f', stockAmount = '%d' where goodsName = '%s'",
-					goodsName, price, stockAmount, discount, prev_goodsName);
+					"update goods set goodsName = '%s', price = '%s', discount = '%s', stockAmount = '%s', categoryName = '%s' where goodsName = '%s'",
+					goodsName, price, stockAmount, discount, categoryName, prev_goodsName);
 			stmt.executeUpdate(query);
 
 			System.out.println("상품 수정에 성공했습니다.");
@@ -79,6 +93,11 @@ public class Goods {
 		Statement stmt = null;
 		boolean result = false;
 
+		// 예외 흐름 E1
+		if(goodsName == null){
+			return false;
+		}
+		
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();

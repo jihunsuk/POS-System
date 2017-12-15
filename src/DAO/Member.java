@@ -14,7 +14,7 @@ public class Member {
 
 	}
 
-	public static boolean doLogin(final String ID, final String PWD) {
+	public boolean doLogin(final String ID, final String PWD) {
 		// JOptionPane.showMessageDialog(null, "아이디가 존재하지 않습니다.");
 		// JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
 		// JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 입력해주세요.");
@@ -26,14 +26,20 @@ public class Member {
 			stmt = c.createStatement();
 			result = false;
 
-			String query = String.format("select ID from member where ID='%s' and PWD='%s'", ID, PWD);
+			String query = String.format("select * from member where ID='%s' and PWD='%s'", ID, PWD);
 
 			ResultSet rs = stmt.executeQuery(query);
-			if (rs.next() && rs.getString("ID").equals(ID)) {
-				return true;
-			} else {
+			if (!rs.next() || !rs.getString("ID").equals(ID)) {
 				return false;
 			}
+			while(rs.next()){
+				if (rs.getString("ID").equals(ID)) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+			
 		} catch (SQLException e) {
 			System.out.println("로그인 예외발생");
 			e.printStackTrace();

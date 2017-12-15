@@ -12,7 +12,8 @@ import javax.swing.SwingConstants;
 import DAO.Member;
 
 public class Login {
-
+	Member m;
+	
 	private JFrame frame;
 	private JTextField ID;
 	private JTextField PWD;
@@ -54,7 +55,8 @@ public class Login {
 		Login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//로그인 눌렀을 경우
-				boolean login = Member.doLogin(ID.getText(), PWD.getText());
+				m = new Member();
+				boolean login = m.doLogin(ID.getText(), PWD.getText());
 				//if (login == true){
 				if(true){
 					new Home();

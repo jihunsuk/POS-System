@@ -23,7 +23,7 @@ public class Goods {
 		this.Category = Category;
 	}
 
-	public boolean addGoods(final String goodsName, final int price, final int stockAmount, final float discount,
+	public static boolean addGoods(final String goodsName, final int price, final int stockAmount, final float discount,
 			final String categoryName) {
 		Connection c = null;
 		Statement stmt = null;
@@ -48,7 +48,7 @@ public class Goods {
 		return result;
 	}
 
-	public boolean modifyGoods(final String prev_goodsName, final String goodsName, final int price,
+	public static boolean modifyGoods(final String prev_goodsName, final String goodsName, final int price,
 			final int stockAmount, final float discount) {
 		Connection c = null;
 		Statement stmt = null;
@@ -74,7 +74,7 @@ public class Goods {
 		return result;
 	}
 
-	public boolean removeGoods(final String goodsName) {
+	public static boolean removeGoods(final String goodsName) {
 		Connection c = null;
 		Statement stmt = null;
 		boolean result = false;

@@ -25,6 +25,11 @@ public class ShoppingBasket {
 		Statement stmt = null;
 		boolean result = false;
 		
+		// øπø‹ »Â∏ß E1
+		if(goodsName == null){
+			return false;
+		}
+		
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
@@ -69,6 +74,11 @@ public class ShoppingBasket {
 		Connection c = null;
 		Statement stmt = null;
 		boolean result = false;
+		
+		// øπø‹ »Â∏ß E1
+		if(goodsName == null){
+			return false;
+		}
 		
 		try {
 			c = DBConnection.getConnection();

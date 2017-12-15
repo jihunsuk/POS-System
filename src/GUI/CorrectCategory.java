@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,6 +49,8 @@ public class CorrectCategory {
 		JButton ok = new JButton("\uD655\uC778");
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				frame.setVisible(false);
 			}
 		});
 		ok.setBounds(104, 145, 97, 23);
@@ -58,6 +59,8 @@ public class CorrectCategory {
 		JButton cancle = new JButton("\uCDE8\uC18C");
 		cancle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				frame.setVisible(false);
 			}
 		});
 		cancle.setBounds(213, 145, 97, 23);

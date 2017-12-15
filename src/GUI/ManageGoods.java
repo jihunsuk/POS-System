@@ -1,10 +1,9 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -45,6 +44,7 @@ public class ManageGoods {
 		JButton ctg_Corret = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp\uC218\uC815</html>");
 		ctg_Corret.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new CorrectCategory();
 			}
 		});
 		ctg_Corret.setBounds(577, 159, 97, 53);
@@ -53,6 +53,7 @@ public class ManageGoods {
 		JButton ctg_Eroll = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp\uB4F1\uB85D</html>");
 		ctg_Eroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new ErollCategory();
 			}
 		});
 		ctg_Eroll.setBounds(455, 159, 97, 53);
@@ -61,6 +62,7 @@ public class ManageGoods {
 		JButton good_Correct = new JButton("\uC0C1\uD488\uC218\uC815");
 		good_Correct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new CorrectGoods();
 			}
 		});
 		good_Correct.setBounds(577, 250, 97, 53);
@@ -69,6 +71,7 @@ public class ManageGoods {
 		JButton good_Eroll = new JButton("\uC0C1\uD488\uB4F1\uB85D\r\n");
 		good_Eroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new ErollGoods();
 			}
 		});
 		good_Eroll.setBounds(455, 250, 97, 53);
@@ -85,6 +88,12 @@ public class ManageGoods {
 		JButton good_Delete = new JButton("\uC0C1\uD488\uC0AD\uC81C");
 		good_Delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int index = table.getSelectedRow();
+				if (index == -1){
+					JOptionPane.showMessageDialog(null, "상품을 선택해주세요.");
+				} else{
+					table.remove(table.getSelectedRow());
+				}
 			}
 		});
 		good_Delete.setBounds(697, 250, 97, 53);

@@ -2,6 +2,8 @@ package GUI;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -49,7 +51,9 @@ public class ErollCategory {
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				frame.setVisible(false);
+//				boolean sucess = addCategory(ctgName.getText());	
+//				if(sucess == true)
+//					frame.setVisible(false);
 			}
 		});
 		ok.setBounds(104, 145, 97, 23);

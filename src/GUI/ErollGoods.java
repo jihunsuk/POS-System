@@ -94,9 +94,10 @@ public class ErollGoods {
 		
 		JButton save = new JButton("\uC800\uC7A5");
 		save.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				frame.setVisible(false);
+			public void actionPerformed(ActionEvent e) {	
+//				boolean sucess = addGoods(goodName.getText(), price.getText(), discount.getText(), stockAmount.getText(), ctgName.getText());
+//				if (sucess == true)
+//					frame.setVisible(false);
 			}
 		});
 		save.setBounds(105, 233, 97, 23);
@@ -105,7 +106,6 @@ public class ErollGoods {
 		JButton cancle = new JButton("\uCDE8\uC18C");
 		cancle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				frame.setVisible(false);
 			}
 		});

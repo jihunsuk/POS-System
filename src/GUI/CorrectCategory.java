@@ -13,11 +13,12 @@ public class CorrectCategory {
 
 	private JFrame frame;
 	private JTextField ctgName;
-
+	private String correctedName;
 	/**
 	 * Create the application.
 	 */
-	public CorrectCategory() {
+	public CorrectCategory(String name) {
+		correctedName = name;
 		initialize();
 	}
 
@@ -50,6 +51,11 @@ public class CorrectCategory {
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				//첫번째인자 수정전 카테고리명, 2번째인자 수정후 카테고리명
+//				boolean sucess = correctCategory(correctedName, ctgName.getText());	
+//				if(sucess == true)
+//					frame.setVisible(false);
+				
 				frame.setVisible(false);
 			}
 		});
@@ -59,7 +65,6 @@ public class CorrectCategory {
 		JButton cancle = new JButton("\uCDE8\uC18C");
 		cancle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				frame.setVisible(false);
 			}
 		});

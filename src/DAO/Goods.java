@@ -116,7 +116,7 @@ public class Goods {
 		return result;
 	}
 
-	public static Goods[] getGoodsList() {
+	public static Goods[] getGoodsList(String categoryName) {
 		Connection c = null;
 		Statement stmt = null;
 		Goods[] goodsList = null;
@@ -125,7 +125,7 @@ public class Goods {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
-			String query = String.format("select * from goods");
+			String query = String.format("select * from goods where categoryName = '%s'", categoryName);
 
 			List<Goods> temp = new ArrayList<>();
 			ResultSet rs = stmt.executeQuery(query);

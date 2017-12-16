@@ -103,6 +103,19 @@ public class ShoppingBasketUI {
 		JButton addGood = new JButton("\uC0C1\uD488\uCD94\uAC00");
 		addGood.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				int index = table.getSelectedRow();
+				String value = null;
+				if(index != -1){
+					value = (String)dtm.getValueAt(index, 0);
+				}
+				boolean sucess = bsk.addGoods(value);
+				if(sucess == false){
+					JOptionPane.showMessageDialog(null, "상품을 선택해주세요.");
+				} else{
+					updateBasket();
+				}
+				
 			}
 		});
 		addGood.setBounds(506, 317, 97, 23);
@@ -112,7 +125,17 @@ public class ShoppingBasketUI {
 		deleteGood.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//System.out.println(goodsList.getSelectedIndex());
+				int index = basket.getSelectedRow();
+				String value = null;
+				if(index != -1){
+					value = (String)dtm2.getValueAt(index, 0);
+				}
+				boolean sucess = bsk.removeGoods(value);
+				if(sucess == false){
+					JOptionPane.showMessageDialog(null, "상품을 선택해주세요.");
+				} else{
+					updateBasket();
+				}
 			}
 		});
 		deleteGood.setBounds(648, 317, 97, 23);
@@ -200,15 +223,15 @@ public class ShoppingBasketUI {
 	}
 	
 	public static void updateBasket(){
-		item = new String[40][4];
+		item = new String[40][3];
 		basketList = bsk.getGoodsList();
 		Amount = bsk.getAmount();
 		for(int j=0; j<basketList.size(); j++){
-			goods[j][0] = basketList.get(i).getGoodsName();
-			goods[j][1] = Integer.toString(basketList.get(i).getPrice());
-			goods[j][2] = Integer.toString(Amount.get(goods[j][0]));
+			item[j][0] = basketList.get(j).getGoodsName();
+			item[j][1] = Integer.toString(basketList.get(j).getPrice());
+			item[j][2] = Integer.toString(Amount.get(item[j][0]));
 		}
-		dtm2 = new DefaultTableModel(item, header);
+		dtm2 = new DefaultTableModel(item, header2);
 		basket.setModel(dtm2);
 		basket.updateUI();
 		

@@ -92,12 +92,15 @@ public class Membership {
 		JButton Member_Enroll = new JButton("\uAC00\uC785\uD558\uAE30");
 		Member_Enroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean join = Member.doMembership(ID.getText(), Pwd.getText(), Name.getText(), Age.getText(), Phone_Number.getText());
-				if (join == true){
+				int join = Member.doMembership(ID.getText(), Pwd.getText(), Name.getText(), Age.getText(), Phone_Number.getText());
+				if (join == 0){
 					JOptionPane.showMessageDialog(null, "가입이 완료되었습니다.");
 					new Login();
 					frame.setVisible(false);
-					
+				} else if(join == 1){
+					JOptionPane.showMessageDialog(null, "중복된 ID입니다. 다시 입력해주세요.");
+				} else{
+					JOptionPane.showMessageDialog(null, "입력되지 않은 정보가 있습니다. 다시 입력해주세요.");
 				}
 			}
 		});

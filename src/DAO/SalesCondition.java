@@ -36,7 +36,7 @@ public class SalesCondition {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
-			String query = String.format("SELECT * from `possystem`.`order` where substring(`time`, 1, 8) = '%s' order by orderNo desc", thisDay);
+			String query = String.format("SELECT * from `possystem`.`order` where substring(`time`, 1, 8) = '%s' order by orderNo", thisDay);
 			ResultSet rs = stmt.executeQuery(query);
 
 			int idx = 0;
@@ -82,7 +82,7 @@ public class SalesCondition {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
-			String query = String.format("SELECT * from `possystem`.`order` where substring(`time`, 1, 6) = '%s' order by orderNo desc", thisMonth);
+			String query = String.format("SELECT * from `possystem`.`order` where substring(`time`, 1, 6) = '%s' order by orderNo", thisMonth);
 			ResultSet rs = stmt.executeQuery(query);
 
 			int idx = 0;

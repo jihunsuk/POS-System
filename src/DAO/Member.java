@@ -14,35 +14,49 @@ public class Member {
 
 	}
 
-	public boolean doLogin(final String ID, final String PWD) {
-		// JOptionPane.showMessageDialog(null, "아이디가 존재하지 않습니다.");
-		// JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
-		// JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 입력해주세요.");
+	public int doLogin(final String ID, final String PWD) {
+		final int SUCCESS = 0;
+		final int E1 = 1;
+		final int E2 = 2;
+		final int E3 = 3;
+
 		Connection c = null;
 		Statement stmt = null;
-		boolean result = false;
-		
+		int result = -1;
+
+		// 예외흐름 E3
+		if (ID.equals("") || PWD.equals("")) {
+			return E3;
+		}
+
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
-			String query = String.format("select * from member where ID='%s' and PWD='%s'", ID, PWD);
-
+			// 예외흐름 E1
+			String query = String.format("select * from member where ID='%s'", ID);
 			ResultSet rs = stmt.executeQuery(query);
 			if (!rs.next() || !rs.getString("ID").equals(ID)) {
 				System.out.println("로그인을 하는데 해당하는 회원이 없습니다.");
-				result = false;
+				return E1;
 			}
-			else {
-				this.ID = ID;
-				this.PWD = PWD;
-				this.Name = rs.getString("NAME");
-				this.Age = rs.getString("AGE");
-				this.PhoneNumber = rs.getString("PHONENUMBER");
-				System.out.println("로그인에 성공했습니다.");
-				result = true;
+
+			// 예외흐름 E2
+			query = String.format("select * from member where ID='%s' and PWD='%s'", ID, PWD);
+			rs = stmt.executeQuery(query);
+			if (!rs.next() || !rs.getString("ID").equals(ID)) {
+				System.out.println("로그인을 하는데 해당하는 아이디의 비밀번호가 틀렸습니다.");
+				return E2;
 			}
+
+			this.ID = ID;
+			this.PWD = PWD;
+			this.Name = rs.getString("NAME");
+			this.Age = rs.getString("AGE");
+			this.PhoneNumber = rs.getString("PHONENUMBER");
+			System.out.println("로그인에 성공했습니다.");
 			
+			result = SUCCESS;
 		} catch (SQLException e) {
 			System.out.println("로그인에 실패했습니다.");
 			e.printStackTrace();
@@ -53,9 +67,6 @@ public class Member {
 
 	public static boolean doMembership(final String ID, final String PWD, final String NAME, final String AGE,
 			final String PHONENUMBER) {
-		// JOptionPane.showMessageDialog(null, "중복된 ID입니다. 다시 입력해 주세요.’");
-		// JOptionPane.showMessageDialog(null, "입력되지 않은 정보가 있습니다. 다시 입력해
-		// 주세요.’");
 		Connection c = null;
 		Statement stmt = null;
 		boolean result = false;
@@ -63,11 +74,11 @@ public class Member {
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
-			
+
 			String query = String.format("insert into Member values('%s','%s','%s','%d','%s')", ID, PWD, NAME, AGE,
 					PHONENUMBER);
 			stmt.executeUpdate(query);
-			
+
 			System.out.println("회원가입에 성공했습니다.");
 			result = true;
 			stmt.close();
@@ -75,7 +86,7 @@ public class Member {
 			System.out.println("회원가입에 실패했습니다.");
 			e.printStackTrace();
 		} catch (Exception e) {
-			
+
 		}
 
 		return result;

@@ -50,6 +50,7 @@ public class ShoppingBasket {
 				String cn = rs.getString("categoryName");
 				Category ct = new Category(cn);
 				p = (int) (p - ((p * d) / 100)); // 할인율 적용
+				p = (p < 0 ? 0 : p); // 음수이하이면 가격은 0
 
 				boolean flag = false;
 				for (Goods g : goodsList) {

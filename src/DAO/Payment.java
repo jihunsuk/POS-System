@@ -63,7 +63,7 @@ public class Payment {
 		return result;
 	}
 
-	public static boolean doCreditPay(List<Goods> goodsList, HashMap<String, Integer> Amount) {
+	public static boolean doCreditPay(final int totalPrice, List<Goods> goodsList, HashMap<String, Integer> Amount) {
 		Connection c = null;
 		Statement stmt = null;
 		boolean result = false;

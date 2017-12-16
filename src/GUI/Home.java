@@ -50,7 +50,7 @@ public class Home {
 		JButton SalesCondition = new JButton("\uB9E4\uCD9C\uD604\uD669");
 		SalesCondition.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new SalesCondition();
+				new SalesConditionUI();
 				frame.setVisible(false);
 			}
 		});

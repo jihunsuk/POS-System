@@ -65,12 +65,20 @@ public class Member {
 		return result;
 	}
 
-	public static boolean doMembership(final String ID, final String PWD, final String NAME, final String AGE,
+	public static int doMembership(final String ID, final String PWD, final String NAME, final String AGE,
 			final String PHONENUMBER) {
+		final int SUCCESS = 0;
+		final int E1 = 1;
+		final int E2 = 2;
 		Connection c = null;
 		Statement stmt = null;
-		boolean result = false;
+		int result = -1;
 
+		// 예외흐름 E2
+		if(ID.equals("") || PWD.equals("") || NAME.equals("") || AGE.equals("") || PHONENUMBER.equals("")){
+			return E2;
+		}
+		
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
@@ -79,14 +87,14 @@ public class Member {
 					PHONENUMBER);
 			stmt.executeUpdate(query);
 
-			System.out.println("회원가입에 성공했습니다.");
-			result = true;
+			result = SUCCESS;
 			stmt.close();
+			System.out.println("회원가입에 성공했습니다.");
 		} catch (SQLException e) {
+			// 예외흐름 E1
+			result = E1;
 			System.out.println("회원가입에 실패했습니다.");
 			e.printStackTrace();
-		} catch (Exception e) {
-
 		}
 
 		return result;

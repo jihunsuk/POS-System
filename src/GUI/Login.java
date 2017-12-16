@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import DAO.Member;
@@ -54,14 +56,18 @@ public class Login {
 		JButton Login = new JButton("\uB85C\uADF8\uC778");
 		Login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//로그인 눌렀을 경우
 				m = new Member();
-				boolean login = m.doLogin(ID.getText(), PWD.getText());
-				//if (login == true){
-				if(true){
+				int login = m.doLogin(ID.getText(), PWD.getText());
+				if(login == 0){
 					new Home();
 					frame.setVisible(false);
-				} 
+				} else if(login == 1){
+					JOptionPane.showMessageDialog(null, "아이디가 존재하지 않습니다.");
+				} else if(login == 2){
+					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
+				} else{
+					JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 입력해주세요.");
+				}
 			}
 		});
 		Login.setBounds(76, 145, 97, 23);

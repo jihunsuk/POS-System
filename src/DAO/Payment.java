@@ -99,9 +99,9 @@ public class Payment {
 				
 			result = true;
 			stmt.close();
-			System.out.println("현금결제에 성공했습니다.");
+			System.out.println("카드결제에 성공했습니다.");
 		} catch (Exception e) {
-			System.out.println("현금결제에 실패했습니다.");
+			System.out.println("카드결제에 실패했습니다.");
 			e.printStackTrace();
 		}
 

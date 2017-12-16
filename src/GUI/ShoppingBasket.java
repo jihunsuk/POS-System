@@ -3,18 +3,41 @@ package GUI;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+
+import DAO.Category;
+import DAO.Goods;
+
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 public class ShoppingBasket {
 
 	private JFrame frame;
 	private JTextField totalPrice;
 	private JTextField receivePrice;
+	
+	private static JTable table;
+	private static Category[] categoryList;
+	private static String[] ctgdata = {};
+	private static DefaultListModel<String> dlm = null;
+	private static JList<String> ctgList = new JList<String>();
+	private static Goods[] goodsList;
+	private static String[][] goods = {};
+	private static String header[] = {"상품명", "가격", "재고수량", "할인율"};
+	private static DefaultTableModel dtm =  new DefaultTableModel(goods, header);
 
 	/**
 	 * Create the application.
@@ -33,13 +56,28 @@ public class ShoppingBasket {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JList ctgList = new JList();
-		ctgList.setBounds(12, 48, 148, 492);
+		updateCategory();
+		ctgList.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				updateGoods(ctgList.getSelectedValue());
+			}
+		});
+		ctgList.setBounds(12, 51, 148, 492);
 		frame.getContentPane().add(ctgList);
 		
-		JList goodsList = new JList();
-		goodsList.setBounds(172, 48, 271, 492);
-		frame.getContentPane().add(goodsList);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(172, 51, 271, 492);
+		frame.getContentPane().add(scrollPane);
+		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		
+		table.setModel(dtm);
+		scrollPane.setViewportView(table);
+		JTableHeader head = table.getTableHeader();
+		head.setBackground(Color.yellow);
+		
+		table.setBounds(172, 48, 271, 492);
 		
 		JList basket = new JList();
 		basket.setBounds(455, 48, 336, 249);
@@ -115,5 +153,32 @@ public class ShoppingBasket {
 		ok.setBounds(578, 449, 97, 23);
 		frame.getContentPane().add(ok);
 	}
+	
+	public static void updateCategory(){
+		categoryList = Category.getCategoryList();
+		ctgdata = new String[categoryList.length];
+		for(int i=0; i<categoryList.length; i++){
+			ctgdata[i] = categoryList[i].getCategoryName();
+		}
+		dlm = new DefaultListModel<String>();
+		for(String s:ctgdata){
+			dlm.addElement(s);
+		}
+		ctgList.setModel(dlm);
+		ctgList.updateUI();
+	}
 
+	public static void updateGoods(String ctgName){
+		goods = new String[40][4];
+		goodsList = Goods.getGoodsList(ctgName);
+		for(int j=0; j<goodsList.length; j++){
+			goods[j][0] = goodsList[j].getGoodsName();
+			goods[j][1] = Integer.toString(goodsList[j].getPrice());
+			goods[j][2] = Integer.toString(goodsList[j].getStockAmount());
+			goods[j][3] = Float.toString(goodsList[j].getDiscount());
+		}
+		dtm = new DefaultTableModel(goods, header);
+		table.setModel(dtm);
+		table.updateUI();
+	}
 }

@@ -154,7 +154,7 @@ public class ShoppingBasketUI {
 		JButton PayforMoney = new JButton("\uD604\uAE08\uACB0\uC81C");
 		PayforMoney.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new payForMoney(totalPrice.getText());
+				new payForMoney(totalPrice.getText(), bsk.getGoodsList(), bsk.getAmount());
 			}
 		});
 		PayforMoney.setBounds(506, 406, 97, 23);
@@ -163,7 +163,7 @@ public class ShoppingBasketUI {
 		JButton PayForCard = new JButton("\uCE74\uB4DC\uACB0\uC81C");
 		PayForCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean sucess = Payment.doCreditPay(Integer.parseInt(totalPrice.getText()));
+				boolean sucess = Payment.doCreditPay(Integer.parseInt(totalPrice.getText()), bsk.getGoodsList(), bsk.getAmount());
 				if(sucess == true){
 					JOptionPane.showMessageDialog(null, "카드결제가 완료되었습니다.");
 					frame.setVisible(false);

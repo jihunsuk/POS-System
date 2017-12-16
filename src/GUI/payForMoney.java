@@ -2,6 +2,8 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import DAO.Goods;
 import DAO.Payment;
 
 public class payForMoney {
@@ -16,10 +19,14 @@ public class payForMoney {
 	private JFrame frame;
 	private String totalMoney;
 	private JTextField money;
-	private JTextField rem;
 
-	public payForMoney(String tMoney) {
+	private List<Goods> basketList;
+	private HashMap<String, Integer> Amount;
+	
+	public payForMoney(String tMoney, List<Goods> list, HashMap<String, Integer> hm) {
 		totalMoney = tMoney;
+		basketList = list;
+		Amount = hm;
 		initialize();
 	}
 
@@ -41,24 +48,15 @@ public class payForMoney {
 		JLabel label = new JLabel("\uBC1B\uC740\uAE08\uC561 :");
 		label.setBounds(100, 63, 71, 15);
 		frame.getContentPane().add(label);
-		
-		JLabel label_1 = new JLabel("\uC794\uC561 :");
-		label_1.setBounds(110, 94, 40, 15);
-		frame.getContentPane().add(label_1);
-		
-		rem = new JTextField();
-		rem.setColumns(10);
-		rem.setBounds(183, 91, 116, 21);
-		frame.getContentPane().add(rem);
 		frame.setVisible(true);
 		JButton pay = new JButton("\uACB0\uC81C");
 		pay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			
-				boolean sucess = Payment.doCashPay(Integer.parseInt(totalMoney)
-						, Integer.parseInt(money.getText()));
-				if(sucess == true){
-					JOptionPane.showMessageDialog(null, "현금결제가 완료되었습니다.");
+				int rem = Payment.doCashPay(Integer.parseInt(totalMoney)
+						, Integer.parseInt(money.getText()), basketList, Amount);
+				if(rem != -1){
+					JOptionPane.showMessageDialog(null, "잔액 : "+rem+"\n현금결제가 완료되었습니다.");
 					frame.setVisible(false);
 					new Home();
 				} else{

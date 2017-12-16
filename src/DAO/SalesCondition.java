@@ -130,4 +130,8 @@ public class SalesCondition {
 	public List<ShoppingBasket> getBasketList(){
 		return this.basketList;
 	}
+
+	public HashMap<Integer, Integer> getOrderMap() {
+		return this.orderMap;
+	}
 }

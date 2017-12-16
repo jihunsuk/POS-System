@@ -20,7 +20,7 @@ public class Payment {
 	public static int doCashPay(final int totalPrice, final int receiveMoney, List<Goods> goodsList, HashMap<String, Integer> Amount) {
 		Connection c = null;
 		Statement stmt = null;
-		int result = totalPrice - receiveMoney;
+		int result = receiveMoney - totalPrice;
 		
 		SimpleDateFormat dayTime = new SimpleDateFormat("yyyyMMddHHmmss");
 		String time = dayTime.format(new Date());

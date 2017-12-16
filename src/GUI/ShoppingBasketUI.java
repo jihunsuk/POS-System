@@ -50,11 +50,12 @@ public class ShoppingBasketUI {
 	private static String[][] item = {};
 	private static String header2[] = {"상품명", "가격", "수량",};
 	private static DefaultTableModel dtm2 =  new DefaultTableModel(item, header2);
-	private static ShoppingBasket bsk = new ShoppingBasket();
+	private static ShoppingBasket bsk;
 	/**
 	 * Create the application.
 	 */
 	public ShoppingBasketUI() {
+		bsk = new ShoppingBasket();
 		initialize();
 	}
 
@@ -154,7 +155,7 @@ public class ShoppingBasketUI {
 		JButton PayforMoney = new JButton("\uD604\uAE08\uACB0\uC81C");
 		PayforMoney.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new payForMoney(totalPrice.getText(), bsk.getGoodsList(), bsk.getAmount());
+				new payForMoney(totalPrice.getText(), bsk.getGoodsList(), bsk.getAmount(), frame, dtm2);
 			}
 		});
 		PayforMoney.setBounds(506, 406, 97, 23);
@@ -168,6 +169,8 @@ public class ShoppingBasketUI {
 				if(sucess == true){
 					JOptionPane.showMessageDialog(null, "카드결제가 완료되었습니다.");
 					frame.setVisible(false);
+					for(int i=0; i<dtm2.getRowCount(); i++)
+						dtm2.removeRow(i);
 					new Home();
 				} else{
 					JOptionPane.showMessageDialog(null, "결제할 상품이 없습니다.");
@@ -181,6 +184,8 @@ public class ShoppingBasketUI {
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Home();
+				for(int i=0; i<dtm2.getRowCount(); i++)
+					dtm2.removeRow(i);
 				frame.setVisible(false);
 			}
 		});

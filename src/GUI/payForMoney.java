@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import DAO.Goods;
 import DAO.Payment;
@@ -19,14 +20,17 @@ public class payForMoney {
 	private JFrame frame;
 	private String totalMoney;
 	private JTextField money;
-
+	private JFrame priviousFrame;
 	private List<Goods> basketList;
 	private HashMap<String, Integer> Amount;
+	private DefaultTableModel dtm;
 	
-	public payForMoney(String tMoney, List<Goods> list, HashMap<String, Integer> hm) {
+	public payForMoney(String tMoney, List<Goods> list, HashMap<String, Integer> hm, JFrame f, DefaultTableModel d) {
 		totalMoney = tMoney;
 		basketList = list;
 		Amount = hm;
+		priviousFrame = f;
+		dtm = d;
 		initialize();
 	}
 
@@ -56,11 +60,14 @@ public class payForMoney {
 				int rem = Payment.doCashPay(Integer.parseInt(totalMoney)
 						, Integer.parseInt(money.getText()), basketList, Amount);
 				if(rem != -1){
-					JOptionPane.showMessageDialog(null, "ì”ì•¡ : "+rem+"\ní˜„ê¸ˆê²°ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
+					JOptionPane.showMessageDialog(null, "ÀÜ¾× : "+rem+"\nÇö±İ°áÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
 					frame.setVisible(false);
+					priviousFrame.setVisible(false);
+					for(int i=0; i<dtm.getRowCount(); i++)
+						dtm.removeRow(i);
 					new Home();
 				} else{
-					JOptionPane.showMessageDialog(null, "ê²°ì œí•  ìƒí’ˆì´ ì—†ìŠµë‹ˆë‹¤.");
+					JOptionPane.showMessageDialog(null, "°áÁ¦ÇÒ »óÇ°ÀÌ ¾ø½À´Ï´Ù.");
 					frame.setVisible(false);
 				}
 			}

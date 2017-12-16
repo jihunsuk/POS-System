@@ -49,7 +49,7 @@ public class ShoppingBasket {
 				float d = rs.getFloat("discount");
 				String cn = rs.getString("categoryName");
 				Category ct = new Category(cn);
-				p = (int) (p * d) / 100; // 할인율 적용
+				p = (int) (p - ((p * d) / 100)); // 할인율 적용
 
 				boolean flag = false;
 				for (Goods g : goodsList) {

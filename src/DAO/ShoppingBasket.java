@@ -46,9 +46,10 @@ public class ShoppingBasket {
 				String gn = rs.getString("goodsName");
 				int p = rs.getInt("price");
 				int s = rs.getInt("stockamount");
-				int d = rs.getInt("discount");
+				float d = rs.getFloat("discount");
 				String cn = rs.getString("categoryName");
 				Category ct = new Category(cn);
+				p = (int) (p * d) / 100; // 할인율 적용
 
 				boolean flag = false;
 				for (Goods g : goodsList) {
@@ -63,7 +64,7 @@ public class ShoppingBasket {
 					goodsList.add(new Goods(gn, p, s, d, ct));
 					Amount.put(goodsName, 1);
 				}
-				
+
 				TotalPrice += p;
 				result = true;
 				// TODO: GUI에서 result = true이면 totalprice변경
@@ -100,7 +101,7 @@ public class ShoppingBasket {
 					if (g.getGoodsName().equals(goodsName)) {
 						goodsList.remove(g);
 						int amount = Amount.remove(goodsName);
-						
+
 						TotalPrice -= amount * g.getPrice();
 						result = true;
 						break;
@@ -155,8 +156,8 @@ public class ShoppingBasket {
 		}
 		return payment;
 	}
-	
-	public List<Goods> getGoodsList(){
+
+	public List<Goods> getGoodsList() {
 		return goodsList;
 	}
 

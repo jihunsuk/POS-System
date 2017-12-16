@@ -30,7 +30,7 @@ public class ShoppingBasket {
 		Statement stmt = null;
 		boolean result = false;
 
-		// ¿¹¿Ü Èå¸§ E1
+		// ì˜ˆì™¸ íë¦„ E1
 		if (goodsName == null) {
 			return false;
 		}
@@ -49,13 +49,13 @@ public class ShoppingBasket {
 				float d = rs.getFloat("discount");
 				String cn = rs.getString("categoryName");
 				Category ct = new Category(cn);
-				p = (int) (p - ((p * d) / 100)); // ÇÒÀÎÀ² Àû¿ë
-				p = (p < 0 ? 0 : p); // À½¼öÀÌÇÏÀÌ¸é °¡°İÀº 0
+				p = (int) (p - ((p * d) / 100)); // í• ì¸ìœ¨ ì ìš©
+				p = (p < 0 ? 0 : p); // ìŒìˆ˜ì´í•˜ì´ë©´ ê°€ê²©ì€ 0
 
 				boolean flag = false;
 				for (Goods g : goodsList) {
 					if (g.getGoodsName().equals(gn)) {
-						// ÀÌ¹Ì Ãß°¡µÈ »óÇ°ÀÌ¸é °³¼ö¸¸ ´Ã¸°´Ù.
+						// ì´ë¯¸ ì¶”ê°€ëœ ìƒí’ˆì´ë©´ ê°œìˆ˜ë§Œ ëŠ˜ë¦°ë‹¤.
 						Amount.replace(goodsName, Amount.get(goodsName) + 1);
 						flag = true;
 						break;
@@ -68,12 +68,12 @@ public class ShoppingBasket {
 
 				TotalPrice += p;
 				result = true;
-				// TODO: GUI¿¡¼­ result = trueÀÌ¸é totalpriceº¯°æ
+				// TODO: GUIì—ì„œ result = trueì´ë©´ totalpriceë³€ê²½
 			}
 
-			System.out.println("Àå¹Ù±¸´Ï»óÇ°´ã±â¿¡ ¼º°øÇß½À´Ï´Ù.");
+			System.out.println("ì¥ë°”êµ¬ë‹ˆìƒí’ˆë‹´ê¸°ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.");
 		} catch (SQLException e) {
-			System.out.println("Àå¹Ù±¸´Ï»óÇ°´ã±â¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
+			System.out.println("ì¥ë°”êµ¬ë‹ˆìƒí’ˆë‹´ê¸°ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 			e.printStackTrace();
 		}
 
@@ -85,7 +85,7 @@ public class ShoppingBasket {
 		Statement stmt = null;
 		boolean result = false;
 
-		// ¿¹¿Ü Èå¸§ E1
+		// ì˜ˆì™¸ íë¦„ E1
 		if (goodsName == null) {
 			return false;
 		}
@@ -106,14 +106,14 @@ public class ShoppingBasket {
 						TotalPrice -= amount * g.getPrice();
 						result = true;
 						break;
-						// TODO: GUI¿¡¼­ result = trueÀÌ¸é totalpriceº¯°æ
+						// TODO: GUIì—ì„œ result = trueì´ë©´ totalpriceë³€ê²½
 					}
 				}
 			}
 
-			System.out.println("Àå¹Ù±¸´Ï»óÇ°»èÁ¦¿¡ ¼º°øÇß½À´Ï´Ù.");
+			System.out.println("ì¥ë°”êµ¬ë‹ˆìƒí’ˆì‚­ì œì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.");
 		} catch (SQLException e) {
-			System.out.println("Àå¹Ù±¸´Ï»óÇ°»èÁ¦¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
+			System.out.println("ì¥ë°”êµ¬ë‹ˆìƒí’ˆì‚­ì œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 			e.printStackTrace();
 		}
 
@@ -148,7 +148,7 @@ public class ShoppingBasket {
 		Change = change;
 	}
 
-	// TODO: GUI¿¡¼­ ShoppingBasket sÀÏ¶§
+	// TODO: GUIì—ì„œ ShoppingBasket sì¼ë•Œ
 	// s.getPayment().doCreditPay(s.getReceiveMoney());
 	// s.getPayment().doCashPay(s.getReceiveMoney(), s.getChange());
 	public Payment getPayment() {

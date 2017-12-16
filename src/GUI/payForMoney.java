@@ -56,11 +56,11 @@ public class payForMoney {
 				int rem = Payment.doCashPay(Integer.parseInt(totalMoney)
 						, Integer.parseInt(money.getText()), basketList, Amount);
 				if(rem != -1){
-					JOptionPane.showMessageDialog(null, "ÀÜ¾× : "+rem+"\nÇö±İ°áÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+					JOptionPane.showMessageDialog(null, "ì”ì•¡ : "+rem+"\ní˜„ê¸ˆê²°ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 					frame.setVisible(false);
 					new Home();
 				} else{
-					JOptionPane.showMessageDialog(null, "°áÁ¦ÇÒ »óÇ°ÀÌ ¾ø½À´Ï´Ù.");
+					JOptionPane.showMessageDialog(null, "ê²°ì œí•  ìƒí’ˆì´ ì—†ìŠµë‹ˆë‹¤.");
 					frame.setVisible(false);
 				}
 			}

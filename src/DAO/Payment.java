@@ -15,8 +15,8 @@ public class Payment {
 
 	}
 
-	// TODO: °áÁ¦°¡ ¿Ï·áµÇ¾úÀ» ¶§ GUI¿¡¼­ È£ÃâÇÏ¿© ¸ÅÃâÃß°¡
-	// ex) GUI¿¡¼­ ShoppingBasket s; ÀÏ¶§
+	// TODO: ê²°ì œê°€ ì™„ë£Œë˜ì—ˆì„ ë•Œ GUIì—ì„œ í˜¸ì¶œí•˜ì—¬ ë§¤ì¶œì¶”ê°€
+	// ex) GUIì—ì„œ ShoppingBasket s; ì¼ë•Œ
 	// s.getPayment().doCashPay();
 	public static int doCashPay(final int totalPrice, final int receiveMoney, List<Goods> goodsList, HashMap<String, Integer> Amount) {
 		Connection c = null;
@@ -32,31 +32,31 @@ public class Payment {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
-			// OrderNo ¼³Á¤
-			String query = String.format("select max(orderno) from order");
+			// OrderNo ì„¤ì •
+			String query = String.format("SELECT MAX(orderNo) from `possystem`.`order`");
 			ResultSet rs = stmt.executeQuery(query);
 			if (!rs.next()) {
 				prevOrderNo = 0;
 			} else {
-				prevOrderNo = rs.getInt(0);
+				prevOrderNo = rs.getInt(1);
 			}
 			thisOrderNo = prevOrderNo + 1;
 			
-			// Order Ãß°¡
+			// Order ì¶”ê°€
 			for (Goods g : goodsList){
 				String goodsName = g.getGoodsName();
 				int amount = Amount.get(goodsName);
 				int price = g.getPrice();
 				
-				query = String.format("insert into order values('%d', '%s', '%s', '%s', '%s')", thisOrderNo, goodsName, price, amount, time);
+				query = String.format("INSERT INTO `possystem`.`order` (`orderNo`, `goodsName`, `price`, `amount`, `time`) VALUES ('%s', '%s', '%s', '%s', '%s');", Integer.toString(thisOrderNo), goodsName, price, amount, time);
 				stmt.executeUpdate(query);
 			}
-				
+
 			stmt.close();
-			System.out.println("Çö±İ°áÁ¦¿¡ ¼º°øÇß½À´Ï´Ù.");
+			System.out.println("í˜„ê¸ˆê²°ì œì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.");
 		} catch (Exception e) {
 			result = -1;
-			System.out.println("Çö±İ°áÁ¦¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
+			System.out.println("í˜„ê¸ˆê²°ì œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 			e.printStackTrace();
 		}
 
@@ -77,8 +77,8 @@ public class Payment {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
-			// OrderNo ¼³Á¤
-			String query = String.format("select max(orderno) from order");
+			// OrderNo ì„¤ì •
+			String query = String.format("select MAX(orderNo) from order");
 			ResultSet rs = stmt.executeQuery(query);
 			if (!rs.next()) {
 				prevOrderNo = 0;
@@ -87,7 +87,7 @@ public class Payment {
 			}
 			thisOrderNo = prevOrderNo + 1;
 			
-			// Order Ãß°¡
+			// Order ì¶”ê°€
 			for (Goods g : goodsList){
 				String goodsName = g.getGoodsName();
 				int amount = Amount.get(goodsName);
@@ -99,9 +99,9 @@ public class Payment {
 				
 			result = true;
 			stmt.close();
-			System.out.println("Ä«µå°áÁ¦¿¡ ¼º°øÇß½À´Ï´Ù.");
+			System.out.println("ì¹´ë“œê²°ì œì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.");
 		} catch (Exception e) {
-			System.out.println("Ä«µå°áÁ¦¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
+			System.out.println("ì¹´ë“œê²°ì œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 			e.printStackTrace();
 		}
 

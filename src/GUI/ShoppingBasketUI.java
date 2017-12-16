@@ -42,13 +42,13 @@ public class ShoppingBasketUI {
 	
 	private static Goods[] goodsList;
 	private static String[][] goods = {};
-	private static String header[] = {"»óÇ°¸í", "°¡°İ", "Àç°í¼ö·®", "ÇÒÀÎÀ²"};
+	private static String header[] = {"ìƒí’ˆëª…", "ê°€ê²©", "ì¬ê³ ìˆ˜ëŸ‰", "í• ì¸ìœ¨"};
 	private static DefaultTableModel dtm =  new DefaultTableModel(goods, header);
 	
 	private static List<Goods> basketList;
 	private static HashMap<String, Integer> Amount;
 	private static String[][] item = {};
-	private static String header2[] = {"»óÇ°¸í", "°¡°İ", "¼ö·®",};
+	private static String header2[] = {"ìƒí’ˆëª…", "ê°€ê²©", "ìˆ˜ëŸ‰",};
 	private static DefaultTableModel dtm2 =  new DefaultTableModel(item, header2);
 	private static ShoppingBasket bsk = new ShoppingBasket();
 	/**
@@ -111,7 +111,7 @@ public class ShoppingBasketUI {
 				}
 				boolean sucess = bsk.addGoods(value);
 				if(sucess == false){
-					JOptionPane.showMessageDialog(null, "»óÇ°À» ¼±ÅÃÇØÁÖ¼¼¿ä.");
+					JOptionPane.showMessageDialog(null, "ìƒí’ˆì„ ì„ íƒí•´ì£¼ì„¸ìš”.");
 				} else{
 					updateBasket();
 				}
@@ -132,7 +132,7 @@ public class ShoppingBasketUI {
 				}
 				boolean sucess = bsk.removeGoods(value);
 				if(sucess == false){
-					JOptionPane.showMessageDialog(null, "»óÇ°À» ¼±ÅÃÇØÁÖ¼¼¿ä.");
+					JOptionPane.showMessageDialog(null, "ìƒí’ˆì„ ì„ íƒí•´ì£¼ì„¸ìš”.");
 				} else{
 					updateBasket();
 				}
@@ -165,11 +165,11 @@ public class ShoppingBasketUI {
 			public void actionPerformed(ActionEvent e) {
 				boolean sucess = Payment.doCreditPay(Integer.parseInt(totalPrice.getText()), bsk.getGoodsList(), bsk.getAmount());
 				if(sucess == true){
-					JOptionPane.showMessageDialog(null, "Ä«µå°áÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+					JOptionPane.showMessageDialog(null, "ì¹´ë“œê²°ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 					frame.setVisible(false);
 					new Home();
 				} else{
-					JOptionPane.showMessageDialog(null, "°áÁ¦ÇÒ »óÇ°ÀÌ ¾ø½À´Ï´Ù.");
+					JOptionPane.showMessageDialog(null, "ê²°ì œí•  ìƒí’ˆì´ ì—†ìŠµë‹ˆë‹¤.");
 				}
 			}
 		});

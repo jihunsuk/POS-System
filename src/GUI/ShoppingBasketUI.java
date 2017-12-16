@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.List;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -19,30 +21,40 @@ import javax.swing.table.JTableHeader;
 
 import DAO.Category;
 import DAO.Goods;
+import DAO.ShoppingBasket;
 
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-public class ShoppingBasket {
+public class ShoppingBasketUI {
 
 	private JFrame frame;
 	private JTextField totalPrice;
 	private JTextField receivePrice;
 	
 	private static JTable table;
+	private static JTable basket;
+	
 	private static Category[] categoryList;
 	private static String[] ctgdata = {};
 	private static DefaultListModel<String> dlm = null;
 	private static JList<String> ctgList = new JList<String>();
+	
 	private static Goods[] goodsList;
 	private static String[][] goods = {};
 	private static String header[] = {"상품명", "가격", "재고수량", "할인율"};
 	private static DefaultTableModel dtm =  new DefaultTableModel(goods, header);
-
+	
+	private static List<Goods> basketList;
+	private static HashMap<String, Integer> Amount;
+	private static String[][] item = {};
+	private static String header2[] = {"상품명", "가격", "수량",};
+	private static DefaultTableModel dtm2 =  new DefaultTableModel(item, header2);
+	private static ShoppingBasket bsk = new ShoppingBasket();
 	/**
 	 * Create the application.
 	 */
-	public ShoppingBasket() {
+	public ShoppingBasketUI() {
 		initialize();
 	}
 
@@ -55,7 +67,7 @@ public class ShoppingBasket {
 		frame.setBounds(100, 100, 819, 592);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+			
 		updateCategory();
 		ctgList.addMouseListener(new MouseAdapter() {
 			@Override
@@ -70,18 +82,23 @@ public class ShoppingBasket {
 		scrollPane.setBounds(172, 51, 271, 492);
 		frame.getContentPane().add(scrollPane);
 		table = new JTable();
-		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);	
 		table.setModel(dtm);
 		scrollPane.setViewportView(table);
 		JTableHeader head = table.getTableHeader();
 		head.setBackground(Color.yellow);
-		
 		table.setBounds(172, 48, 271, 492);
 		
-		JList basket = new JList();
+		JScrollPane scrollPane2 = new JScrollPane();
+		scrollPane2.setBounds(455, 48, 336, 249);
+		frame.getContentPane().add(scrollPane2);
+		basket = new JTable();
+		basket.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);	
+		basket.setModel(dtm2);
+		scrollPane2.setViewportView(basket);
+		JTableHeader head2 = basket.getTableHeader();
+		head2.setBackground(Color.yellow);
 		basket.setBounds(455, 48, 336, 249);
-		frame.getContentPane().add(basket);
 		
 		JButton addGood = new JButton("\uC0C1\uD488\uCD94\uAC00");
 		addGood.addActionListener(new ActionListener() {
@@ -180,5 +197,20 @@ public class ShoppingBasket {
 		dtm = new DefaultTableModel(goods, header);
 		table.setModel(dtm);
 		table.updateUI();
+	}
+	
+	public static void updateBasket(){
+		item = new String[40][4];
+		basketList = bsk.getGoodsList();
+		Amount = bsk.getAmount();
+		for(int j=0; j<basketList.size(); j++){
+			goods[j][0] = basketList.get(i).getGoodsName();
+			goods[j][1] = Integer.toString(basketList.get(i).getPrice());
+			goods[j][2] = Integer.toString(Amount.get(goods[j][0]));
+		}
+		dtm2 = new DefaultTableModel(item, header);
+		basket.setModel(dtm2);
+		basket.updateUI();
+		
 	}
 }

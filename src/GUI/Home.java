@@ -40,7 +40,7 @@ public class Home {
 		JButton ShoppingBasket = new JButton("\uC7A5\uBC14\uAD6C\uB2C8");
 		ShoppingBasket.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ShoppingBasket();
+				new ShoppingBasketUI();
 				frame.setVisible(false);
 			}
 		});

@@ -83,7 +83,7 @@ public class Member {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
-			String query = String.format("insert into Member values('%s','%s','%s','%d','%s')", ID, PWD, NAME, AGE,
+			String query = String.format("insert into Member values('%s','%s','%s','%s','%s')", ID, PWD, NAME, AGE,
 					PHONENUMBER);
 			stmt.executeUpdate(query);
 

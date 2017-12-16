@@ -12,10 +12,12 @@ import javax.swing.JTextField;
 public class payForMoney {
 
 	private JFrame frame;
+	private String totalMoney;
 	private JTextField money;
 	private JTextField rem;
 
-	public payForMoney() {
+	public payForMoney(String tMoney) {
+		totalMoney = tMoney;
 		initialize();
 	}
 
@@ -50,9 +52,17 @@ public class payForMoney {
 		JButton pay = new JButton("\uACB0\uC81C");
 		pay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				JOptionPane.showMessageDialog(null, "현금결제가 완료되었습니다.");
-				frame.setVisible(false);
+			
+				boolean sucess = Payment.doCashPay(Integer.parseInt(totalMoney)
+						, Integer.parseInt(money.getText()));
+				if(sucess == true){
+					JOptionPane.showMessageDialog(null, "현금결제가 완료되었습니다.");
+					frame.setVisible(false);
+					new Home();
+				} else{
+					JOptionPane.showMessageDialog(null, "결제할 상품이 없습니다.");
+					frame.setVisible(false);
+				}
 			}
 		});
 		pay.setBounds(79, 159, 97, 23);

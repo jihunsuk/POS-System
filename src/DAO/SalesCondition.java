@@ -3,14 +3,20 @@ package DAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import DB.DBConnection;
 
 public class SalesCondition {
 	private int totalSalesMoney;
+	private HashMap<Integer, String> date;
+	private List<ShoppingBasket> basketList;
 	
 	public SalesCondition(){
-		
+		basketList = new ArrayList<>();
+		date = new HashMap<>();
 	}
 
 	public static void daySalesCheck(){
@@ -21,8 +27,17 @@ public class SalesCondition {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
-			String query = String.format("select * from order");
+			String query = String.format("SELECT * from `possystem`.`order` order by orderNo desc");
 			ResultSet rs = stmt.executeQuery(query);
+			
+			
+			while(rs.next()){
+				String goodsName = rs.getString("goodsName");
+				String time = rs.getString("time");
+				int orderNo = rs.getInt("orrderNo");
+				int price = rs.getInt("price");
+				int amount = rs.getInt("amount");
+			}
 			
 			stmt.close();
 			System.out.println("조회에 성공했습니다.");

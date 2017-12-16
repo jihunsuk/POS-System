@@ -155,5 +155,9 @@ public class ShoppingBasket {
 		}
 		return payment;
 	}
+	
+	public List<Goods> getGoodsList(){
+		return goodsList;
+	}
 
 }

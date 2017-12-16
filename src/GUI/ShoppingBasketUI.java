@@ -163,6 +163,7 @@ public class ShoppingBasketUI {
 		JButton PayForCard = new JButton("\uCE74\uB4DC\uACB0\uC81C");
 		PayForCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(totalPrice.getText());
 				boolean sucess = Payment.doCreditPay(Integer.parseInt(totalPrice.getText()), bsk.getGoodsList(), bsk.getAmount());
 				if(sucess == true){
 					JOptionPane.showMessageDialog(null, "카드결제가 완료되었습니다.");

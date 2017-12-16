@@ -161,5 +161,12 @@ public class ShoppingBasket {
 	public List<Goods> getGoodsList() {
 		return goodsList;
 	}
+	
+	public void setGoodsList(List<Goods> goodsList) {
+		this.goodsList = goodsList;
+	}
 
+	public void setAmount(HashMap<String, Integer> a) {
+		Amount = a;
+	}
 }

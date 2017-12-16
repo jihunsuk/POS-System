@@ -101,16 +101,17 @@ public class CorrectGoods {
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				boolean sucess = Goods.modifyGoods(correctedName, goodName.getText(), price.getText(), stockAmount.getText(),
+				int sucess = Goods.modifyGoods(correctedName, goodName.getText(), price.getText(), stockAmount.getText(),
 						discount.getText(), ctgName.getText());
-				if(sucess == true){
+				if(sucess == 0){
 					frame.setVisible(false);
 					ManageGoods.updateGoods(ctgName.getText());
+				} else if(sucess == 1){
+					JOptionPane.showMessageDialog(null, "상품을 선택해주세요.");
+					frame.setVisible(false);
 				} else{
 					JOptionPane.showMessageDialog(null, "입력되지 않은 상품 정보가 있습니다.");
 				}
-				
-				frame.setVisible(false);
 			}
 		});
 		save.setBounds(105, 233, 97, 23);

@@ -50,6 +50,7 @@ public class Payment {
 				query = String.format("INSERT INTO `possystem`.`order` (`orderNo`, `goodsName`, `price`, `amount`, `time`) VALUES ('%s', '%s', '%s', '%s', '%s');", Integer.toString(thisOrderNo), goodsName, price, amount, time);
 				stmt.executeUpdate(query);
 				query = String.format("UPDATE `possystem`.`goods` SET `stockamount` = `stockamount` - '%d' WHERE goodsname = '%s'", amount, goodsName);
+				stmt.executeUpdate(query);
 			}
 
 			stmt.close();
@@ -95,6 +96,7 @@ public class Payment {
 				query = String.format("INSERT INTO `possystem`.`order` (`orderNo`, `goodsName`, `price`, `amount`, `time`) VALUES ('%s', '%s', '%s', '%s', '%s');", Integer.toString(thisOrderNo), goodsName, price, amount, time);
 				stmt.executeUpdate(query);
 				query = String.format("UPDATE `possystem`.`goods` SET `stockamount` = `stockamount` - '%d' WHERE goodsname = '%s'", amount, goodsName);
+				stmt.executeUpdate(query);
 			}
 				
 			result = true;

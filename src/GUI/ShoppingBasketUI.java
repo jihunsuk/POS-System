@@ -155,7 +155,7 @@ public class ShoppingBasketUI {
 		JButton PayforMoney = new JButton("\uD604\uAE08\uACB0\uC81C");
 		PayforMoney.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new payForMoney(totalPrice.getText(), bsk.getGoodsList(), bsk.getAmount(), frame, dtm2);
+				new payForMoney(totalPrice.getText(), bsk.getGoodsList(), bsk.getAmount(), frame, dtm2, dtm, totalPrice);
 			}
 		});
 		PayforMoney.setBounds(506, 406, 97, 23);
@@ -171,6 +171,9 @@ public class ShoppingBasketUI {
 					frame.setVisible(false);
 					for(int i=0; i<dtm2.getRowCount(); i++)
 						dtm2.removeRow(i);
+					for(int i=0; i<dtm.getRowCount(); i++)
+						dtm.removeRow(i);
+					totalPrice.setText("");
 					new Home();
 				} else{
 					JOptionPane.showMessageDialog(null, "결제할 상품이 없습니다.");
@@ -186,7 +189,10 @@ public class ShoppingBasketUI {
 				new Home();
 				for(int i=0; i<dtm2.getRowCount(); i++)
 					dtm2.removeRow(i);
+				for(int i=0; i<dtm.getRowCount(); i++)
+					dtm.removeRow(i);
 				frame.setVisible(false);
+				totalPrice.setText("");
 			}
 		});
 		ok.setBounds(578, 449, 97, 23);

@@ -24,13 +24,17 @@ public class payForMoney {
 	private List<Goods> basketList;
 	private HashMap<String, Integer> Amount;
 	private DefaultTableModel dtm;
-	
-	public payForMoney(String tMoney, List<Goods> list, HashMap<String, Integer> hm, JFrame f, DefaultTableModel d) {
+	private DefaultTableModel dtm2;
+	private JTextField totalPrice;
+	public payForMoney(String tMoney, List<Goods> list, HashMap<String, Integer> hm, JFrame f, DefaultTableModel d
+			, DefaultTableModel d2, JTextField price) {
 		totalMoney = tMoney;
 		basketList = list;
 		Amount = hm;
 		priviousFrame = f;
 		dtm = d;
+		dtm2 = d2;
+		totalPrice = price;
 		initialize();
 	}
 
@@ -65,6 +69,9 @@ public class payForMoney {
 					priviousFrame.setVisible(false);
 					for(int i=0; i<dtm.getRowCount(); i++)
 						dtm.removeRow(i);
+					for(int i=0; i<dtm2.getRowCount(); i++)
+						dtm2.removeRow(i);
+					totalPrice.setText("");
 					new Home();
 				} else{
 					JOptionPane.showMessageDialog(null, "결제할 상품이 없습니다.");

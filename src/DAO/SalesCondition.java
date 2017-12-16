@@ -7,11 +7,11 @@ public class SalesCondition {
 		
 	}
 
-	public void daySalesCheck(){
+	public static void daySalesCheck(){
 		
 	}
 
-	public void monthSalesCheck(){
+	public static void monthSalesCheck(){
 		
 	}
 	

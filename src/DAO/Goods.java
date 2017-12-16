@@ -53,19 +53,23 @@ public class Goods {
 		return result;
 	}
 
-	public static boolean modifyGoods(final String prev_goodsName, final String goodsName, final String price,
+	public static int modifyGoods(final String prev_goodsName, final String goodsName, final String price,
 			final String stockAmount, final String discount, final String categoryName) {
+		final int SUCCESS = 0;
+		final int E1 = 1;
+		final int E2 = 2;
+		
 		Connection c = null;
 		Statement stmt = null;
-		boolean result = false;
+		int result = -1;
 
 		// 예외 흐름 E1
 		if(prev_goodsName == null){
-			return false;
+			return E1;
 		}
 		// 예외 흐름 E2
 		if(goodsName.equals("") || price.equals("") || stockAmount.equals("") || discount.equals("") || categoryName.equals("")){
-			return false;
+			return E2;
 		}
 		
 		try {
@@ -78,7 +82,7 @@ public class Goods {
 			stmt.executeUpdate(query);
 
 			System.out.println("상품 수정에 성공했습니다.");
-			result = true;
+			result = SUCCESS;
 			stmt.close();
 		} catch (Exception e) {
 			System.out.println("상품 수정에 실패했습니다.");

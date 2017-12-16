@@ -21,6 +21,7 @@ import javax.swing.table.JTableHeader;
 
 import DAO.Category;
 import DAO.Goods;
+import DAO.Payment;
 import DAO.ShoppingBasket;
 
 import javax.swing.JTextField;
@@ -29,8 +30,7 @@ import javax.swing.ListSelectionModel;
 public class ShoppingBasketUI {
 
 	private JFrame frame;
-	private JTextField totalPrice;
-	private JTextField receivePrice;
+	private static JTextField totalPrice = new JTextField();
 	
 	private static JTable table;
 	private static JTable basket;
@@ -143,29 +143,18 @@ public class ShoppingBasketUI {
 		
 		JLabel label = new JLabel("\uCD1D\uAE08\uC561 :");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setBounds(455, 353, 76, 15);
+		label.setBounds(455, 367, 76, 15);
 		frame.getContentPane().add(label);
 		
-		totalPrice = new JTextField();
-		totalPrice.setBounds(537, 350, 116, 21);
+		
+		totalPrice.setBounds(537, 364, 116, 21);
 		frame.getContentPane().add(totalPrice);
 		totalPrice.setColumns(10);
-		
-		JLabel label_1 = new JLabel("\uBC1B\uC740\uAE08\uC561 :");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setBounds(455, 378, 76, 15);
-		frame.getContentPane().add(label_1);
-		
-		receivePrice = new JTextField();
-		receivePrice.setColumns(10);
-		receivePrice.setBounds(537, 375, 116, 21);
-		frame.getContentPane().add(receivePrice);
 		
 		JButton PayforMoney = new JButton("\uD604\uAE08\uACB0\uC81C");
 		PayforMoney.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				new payForMoney();
+				new payForMoney(totalPrice.getText());
 			}
 		});
 		PayforMoney.setBounds(506, 406, 97, 23);
@@ -174,10 +163,14 @@ public class ShoppingBasketUI {
 		JButton PayForCard = new JButton("\uCE74\uB4DC\uACB0\uC81C");
 		PayForCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				JOptionPane.showMessageDialog(null, "카드결제가 완료되었습니다.");
-				frame.setVisible(false);
-				new Home();
+				boolean sucess = Payment.doCreditPay(Integer.parseInt(totalPrice.getText()));
+				if(sucess == true){
+					JOptionPane.showMessageDialog(null, "카드결제가 완료되었습니다.");
+					frame.setVisible(false);
+					new Home();
+				} else{
+					JOptionPane.showMessageDialog(null, "결제할 상품이 없습니다.");
+				}
 			}
 		});
 		PayForCard.setBounds(648, 406, 97, 23);
@@ -234,6 +227,6 @@ public class ShoppingBasketUI {
 		dtm2 = new DefaultTableModel(item, header2);
 		basket.setModel(dtm2);
 		basket.updateUI();
-		
+		totalPrice.setText(Integer.toString(bsk.getTotalPrice()));
 	}
 }

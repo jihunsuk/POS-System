@@ -13,18 +13,22 @@ import DB.DBConnection;
 
 public class SalesCondition {
 	private int totalSalesMoney;
-	private HashMap<Integer, String> date;
+	private HashMap<Integer, Integer> orderMap; // <basketIndex, orderNo> 
+	private HashMap<Integer, String> date; // <basketIndex, date>
 	private List<ShoppingBasket> basketList;
 
 	public SalesCondition() {
 		basketList = new ArrayList<>();
 		date = new HashMap<>();
+		orderMap = new HashMap<>();
 	}
 
 	public void daySalesCheck() {
 		Connection c = null;
 		Statement stmt = null;
 		basketList.clear();
+		date.clear();
+		orderMap.clear();
 		
 		SimpleDateFormat dayTime = new SimpleDateFormat("yyyyMMdd");
 		String thisDay = dayTime.format(new Date());
@@ -35,6 +39,7 @@ public class SalesCondition {
 			String query = String.format("SELECT * from `possystem`.`order` where substring(`time`, 1, 8) = '%s' order by orderNo desc", thisDay);
 			ResultSet rs = stmt.executeQuery(query);
 
+			int idx = 0;
 			int prevOrderNo = -1;
 			ShoppingBasket bsk = null;
 			while (rs.next()) {
@@ -47,8 +52,10 @@ public class SalesCondition {
 				if (prevOrderNo != orderNo) {
 					bsk = new ShoppingBasket();
 					basketList.add(bsk);
-					date.put(orderNo, time);
+					date.put(idx, time);
+					orderMap.put(idx, orderNo);
 					prevOrderNo = orderNo;
+					idx++;
 				}
 				
 				bsk.setTotalPrice(bsk.getTotalPrice() + (price * amount));
@@ -66,6 +73,8 @@ public class SalesCondition {
 		Connection c = null;
 		Statement stmt = null;
 		basketList.clear();
+		date.clear();
+		orderMap.clear();
 		
 		SimpleDateFormat dayTime = new SimpleDateFormat("yyyyMM");
 		String thisMonth = dayTime.format(new Date());
@@ -76,6 +85,7 @@ public class SalesCondition {
 			String query = String.format("SELECT * from `possystem`.`order` where substring(`time`, 1, 6) = '%s' order by orderNo desc", thisMonth);
 			ResultSet rs = stmt.executeQuery(query);
 
+			int idx = 0;
 			int prevOrderNo = -1;
 			ShoppingBasket bsk = null;
 			while (rs.next()) {
@@ -88,8 +98,10 @@ public class SalesCondition {
 				if (prevOrderNo != orderNo) {
 					bsk = new ShoppingBasket();
 					basketList.add(bsk);
-					date.put(orderNo, time);
+					date.put(idx, time);
+					orderMap.put(idx, orderNo);
 					prevOrderNo = orderNo;
+					idx++;
 				}
 				
 				bsk.setTotalPrice(bsk.getTotalPrice() + (price * amount));

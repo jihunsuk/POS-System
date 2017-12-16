@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import DAO.Payment;
+
 public class payForMoney {
 
 	private JFrame frame;

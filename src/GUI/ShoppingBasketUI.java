@@ -21,6 +21,7 @@ import javax.swing.table.JTableHeader;
 
 import DAO.Category;
 import DAO.Goods;
+import DAO.Payment;
 import DAO.ShoppingBasket;
 
 import javax.swing.JTextField;

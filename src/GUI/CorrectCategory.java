@@ -31,7 +31,7 @@ public class CorrectCategory {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setVisible(true);
-		frame.setTitle("\uCE74\uD14C\uACE0\uB9AC \uB4F1\uB85D");
+		frame.setTitle("\uCE74\uD14C\uACE0\uB9AC \uC218\uC815");
 		frame.setBounds(100, 100, 438, 240);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -42,7 +42,7 @@ public class CorrectCategory {
 		frame.getContentPane().add(label);
 		
 		JLabel lblNewLabel = new JLabel("\uCE74\uD14C\uACE0\uB9AC\uBA85");
-		lblNewLabel.setBounds(60, 90, 60, 15);
+		lblNewLabel.setBounds(60, 90, 71, 15);
 		frame.getContentPane().add(lblNewLabel);
 		
 		ctgName = new JTextField();

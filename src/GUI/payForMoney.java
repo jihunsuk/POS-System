@@ -44,17 +44,17 @@ public class payForMoney {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("\uD604\uAE08\uACB0\uC81C");
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 335, 205);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		money = new JTextField();
-		money.setBounds(183, 60, 116, 21);
+		money.setBounds(147, 44, 116, 21);
 		frame.getContentPane().add(money);
 		money.setColumns(10);
 		
 		JLabel label = new JLabel("\uBC1B\uC740\uAE08\uC561 :");
-		label.setBounds(100, 63, 71, 15);
+		label.setBounds(64, 47, 71, 15);
 		frame.getContentPane().add(label);
 		frame.setVisible(true);
 		JButton pay = new JButton("\uACB0\uC81C");
@@ -79,7 +79,7 @@ public class payForMoney {
 				}
 			}
 		});
-		pay.setBounds(79, 159, 97, 23);
+		pay.setBounds(51, 98, 97, 23);
 		frame.getContentPane().add(pay);
 		
 		JButton cancle = new JButton("\uCDE8\uC18C");
@@ -89,7 +89,7 @@ public class payForMoney {
 				frame.setVisible(false);
 			}
 		});
-		cancle.setBounds(228, 159, 97, 23);
+		cancle.setBounds(166, 98, 97, 23);
 		frame.getContentPane().add(cancle);
 	}
 

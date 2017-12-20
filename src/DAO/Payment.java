@@ -12,19 +12,20 @@ import java.util.Locale;
 import DB.DBConnection;
 
 public class Payment {
-	
+
 	public Payment() {
 
 	}
 
-	public static int doCashPay(final int totalPrice, final int receiveMoney, List<Goods> goodsList, HashMap<String, Integer> Amount) {
+	public static int doCashPay(final int totalPrice, final int receiveMoney, List<Goods> goodsList,
+			HashMap<String, Integer> Amount) {
 		Connection c = null;
 		Statement stmt = null;
 		int result = receiveMoney - totalPrice;
-		
+
 		SimpleDateFormat dayTime = new SimpleDateFormat("yyyyMMddHHmmss");
 		String time = dayTime.format(new Date());
-		
+
 		int prevOrderNo;
 		int thisOrderNo;
 		try {
@@ -40,16 +41,20 @@ public class Payment {
 				prevOrderNo = rs.getInt(1);
 			}
 			thisOrderNo = prevOrderNo + 1;
-			
+
 			// Order 추가
-			for (Goods g : goodsList){
+			for (Goods g : goodsList) {
 				String goodsName = g.getGoodsName();
 				int amount = Amount.get(goodsName);
 				int price = g.getPrice();
-				
-				query = String.format("INSERT INTO `possystem`.`order` (`orderNo`, `goodsName`, `price`, `amount`, `time`) VALUES ('%s', '%s', '%s', '%s', '%s');", Integer.toString(thisOrderNo), goodsName, price, amount, time);
+
+				query = String.format(
+						"INSERT INTO `possystem`.`order` (`orderNo`, `goodsName`, `price`, `amount`, `time`) VALUES ('%s', '%s', '%s', '%s', '%s');",
+						Integer.toString(thisOrderNo), goodsName, price, amount, time);
 				stmt.executeUpdate(query);
-				query = String.format("UPDATE `possystem`.`goods` SET `stockamount` = `stockamount` - '%d' WHERE goodsname = '%s'", amount, goodsName);
+				query = String.format(
+						"UPDATE `possystem`.`goods` SET `stockamount` = `stockamount` - '%d' WHERE goodsname = '%s'",
+						amount, goodsName);
 				stmt.executeUpdate(query);
 			}
 
@@ -86,19 +91,23 @@ public class Payment {
 				prevOrderNo = rs.getInt(1);
 			}
 			thisOrderNo = prevOrderNo + 1;
-			
+
 			// Order 추가
-			for (Goods g : goodsList){
+			for (Goods g : goodsList) {
 				String goodsName = g.getGoodsName();
 				int amount = Amount.get(goodsName);
 				int price = g.getPrice();
-				
-				query = String.format("INSERT INTO `possystem`.`order` (`orderNo`, `goodsName`, `price`, `amount`, `time`) VALUES ('%s', '%s', '%s', '%s', '%s');", Integer.toString(thisOrderNo), goodsName, price, amount, time);
+
+				query = String.format(
+						"INSERT INTO `possystem`.`order` (`orderNo`, `goodsName`, `price`, `amount`, `time`) VALUES ('%s', '%s', '%s', '%s', '%s');",
+						Integer.toString(thisOrderNo), goodsName, price, amount, time);
 				stmt.executeUpdate(query);
-				query = String.format("UPDATE `possystem`.`goods` SET `stockamount` = `stockamount` - '%d' WHERE goodsname = '%s'", amount, goodsName);
+				query = String.format(
+						"UPDATE `possystem`.`goods` SET `stockamount` = `stockamount` - '%d' WHERE goodsname = '%s'",
+						amount, goodsName);
 				stmt.executeUpdate(query);
 			}
-				
+
 			result = true;
 			stmt.close();
 			System.out.println("카드결제에 성공했습니다.");

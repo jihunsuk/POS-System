@@ -20,7 +20,7 @@ public class Membership {
 	private JTextField Name;
 	private JTextField Age;
 	private JTextField Phone_Number;
-	
+
 	/**
 	 * Create the application.
 	 */
@@ -38,75 +38,76 @@ public class Membership {
 		frame.setBounds(100, 100, 455, 305);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("\uC544\uC774\uB514");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(79, 49, 69, 15);
 		frame.getContentPane().add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("\uBE44\uBC00\uBC88\uD638");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(79, 74, 69, 15);
 		frame.getContentPane().add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("\uC774\uB984");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(79, 99, 69, 15);
 		frame.getContentPane().add(lblNewLabel_2);
-		
+
 		JLabel lblNewLabel_3 = new JLabel("\uB098\uC774");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setBounds(79, 124, 69, 15);
 		frame.getContentPane().add(lblNewLabel_3);
-		
+
 		JLabel lblNewLabel_4 = new JLabel("\uD734\uB300\uD3F0 \uBC88\uD638");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setBounds(79, 149, 69, 15);
 		frame.getContentPane().add(lblNewLabel_4);
-		
+
 		ID = new JTextField();
 		ID.setBounds(178, 46, 186, 21);
 		frame.getContentPane().add(ID);
 		ID.setColumns(10);
-		
+
 		Pwd = new JTextField();
 		Pwd.setBounds(178, 71, 186, 21);
 		frame.getContentPane().add(Pwd);
 		Pwd.setColumns(10);
-		
+
 		Name = new JTextField();
 		Name.setBounds(178, 96, 186, 21);
 		frame.getContentPane().add(Name);
 		Name.setColumns(10);
-		
+
 		Age = new JTextField();
 		Age.setBounds(178, 121, 186, 21);
 		frame.getContentPane().add(Age);
 		Age.setColumns(10);
-		
+
 		Phone_Number = new JTextField();
 		Phone_Number.setBounds(178, 146, 186, 21);
 		frame.getContentPane().add(Phone_Number);
 		Phone_Number.setColumns(10);
-		
+
 		JButton Member_Enroll = new JButton("\uAC00\uC785\uD558\uAE30");
 		Member_Enroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int join = Member.doMembership(ID.getText(), Pwd.getText(), Name.getText(), Age.getText(), Phone_Number.getText());
-				if (join == 0){
+				int join = Member.doMembership(ID.getText(), Pwd.getText(), Name.getText(), Age.getText(),
+						Phone_Number.getText());
+				if (join == 0) {
 					JOptionPane.showMessageDialog(null, "가입이 완료되었습니다.");
 					new Login();
 					frame.setVisible(false);
-				} else if(join == 1){
+				} else if (join == 1) {
 					JOptionPane.showMessageDialog(null, "중복된 ID입니다. 다시 입력해주세요.");
-				} else{
+				} else {
 					JOptionPane.showMessageDialog(null, "입력되지 않은 정보가 있습니다. 다시 입력해주세요.");
 				}
 			}
 		});
 		Member_Enroll.setBounds(112, 198, 97, 23);
 		frame.getContentPane().add(Member_Enroll);
-		
+
 		JButton Enroll_Cancle = new JButton("\uAC00\uC785\uCDE8\uC18C");
 		Enroll_Cancle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

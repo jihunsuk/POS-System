@@ -13,7 +13,7 @@ import DB.DBConnection;
 
 public class SalesCondition {
 	private int totalSalesMoney;
-	private HashMap<Integer, Integer> orderMap; // <basketIndex, orderNo> 
+	private HashMap<Integer, Integer> orderMap; // <basketIndex, orderNo>
 	private HashMap<Integer, String> date; // <basketIndex, date>
 	private List<ShoppingBasket> basketList;
 
@@ -29,14 +29,15 @@ public class SalesCondition {
 		basketList.clear();
 		date.clear();
 		orderMap.clear();
-		
+
 		SimpleDateFormat dayTime = new SimpleDateFormat("yyyyMMdd");
 		String thisDay = dayTime.format(new Date());
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
-			String query = String.format("SELECT * from `possystem`.`order` where substring(`time`, 1, 8) = '%s' order by orderNo", thisDay);
+			String query = String.format(
+					"SELECT * from `possystem`.`order` where substring(`time`, 1, 8) = '%s' order by orderNo", thisDay);
 			ResultSet rs = stmt.executeQuery(query);
 
 			int idx = 0;
@@ -57,7 +58,7 @@ public class SalesCondition {
 					prevOrderNo = orderNo;
 					idx++;
 				}
-				
+
 				bsk.setTotalPrice(bsk.getTotalPrice() + (price * amount));
 			}
 
@@ -75,14 +76,16 @@ public class SalesCondition {
 		basketList.clear();
 		date.clear();
 		orderMap.clear();
-		
+
 		SimpleDateFormat dayTime = new SimpleDateFormat("yyyyMM");
 		String thisMonth = dayTime.format(new Date());
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
-			String query = String.format("SELECT * from `possystem`.`order` where substring(`time`, 1, 6) = '%s' order by orderNo", thisMonth);
+			String query = String.format(
+					"SELECT * from `possystem`.`order` where substring(`time`, 1, 6) = '%s' order by orderNo",
+					thisMonth);
 			ResultSet rs = stmt.executeQuery(query);
 
 			int idx = 0;
@@ -103,7 +106,7 @@ public class SalesCondition {
 					prevOrderNo = orderNo;
 					idx++;
 				}
-				
+
 				bsk.setTotalPrice(bsk.getTotalPrice() + (price * amount));
 			}
 
@@ -122,12 +125,12 @@ public class SalesCondition {
 	public void setTotalSalesMoney(int totalSalesMoney) {
 		this.totalSalesMoney = totalSalesMoney;
 	}
-	
-	public HashMap<Integer, String> getDate(){
+
+	public HashMap<Integer, String> getDate() {
 		return this.date;
 	}
-	
-	public List<ShoppingBasket> getBasketList(){
+
+	public List<ShoppingBasket> getBasketList() {
 		return this.basketList;
 	}
 

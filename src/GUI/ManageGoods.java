@@ -30,8 +30,9 @@ public class ManageGoods {
 	private static JList<String> ctgList = new JList<String>();
 	private static Goods[] goodsList;
 	private static String[][] goods = {};
-	private static String header[] = {"상품명", "가격", "재고수량", "할인율"};
-	private static DefaultTableModel dtm =  new DefaultTableModel(goods, header);
+	private static String header[] = { "상품명", "가격", "재고수량", "할인율" };
+	private static DefaultTableModel dtm = new DefaultTableModel(goods, header);
+
 	/**
 	 * Create the application.
 	 */
@@ -49,7 +50,7 @@ public class ManageGoods {
 		frame.setBounds(100, 100, 819, 592);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-			
+
 		updateCategory();
 		ctgList.addMouseListener(new MouseAdapter() {
 			@Override
@@ -65,14 +66,14 @@ public class ManageGoods {
 		frame.getContentPane().add(scrollPane);
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		
+
 		table.setModel(dtm);
 		scrollPane.setViewportView(table);
 		JTableHeader head = table.getTableHeader();
 		head.setBackground(Color.yellow);
-		
+
 		table.setBounds(172, 48, 271, 492);
-		
+
 		JButton ctg_Eroll = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp&nbsp&nbsp\uB4F1\uB85D</html>");
 		ctg_Eroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -81,7 +82,7 @@ public class ManageGoods {
 		});
 		ctg_Eroll.setBounds(455, 159, 97, 53);
 		frame.getContentPane().add(ctg_Eroll);
-		
+
 		JButton ctg_Corret = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp&nbsp&nbsp\uC218\uC815</html>");
 		ctg_Corret.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -93,68 +94,68 @@ public class ManageGoods {
 		});
 		ctg_Corret.setBounds(577, 159, 97, 53);
 		frame.getContentPane().add(ctg_Corret);
-		
+
 		JButton ctg_Delete = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp&nbsp&nbsp\uC0AD\uC81C</html>;");
 		ctg_Delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				int index = ctgList.getSelectedIndex();
-				if (index == -1){
+				if (index == -1) {
 					JOptionPane.showMessageDialog(null, "카테고리를 선택해주세요.");
-				} else{
+				} else {
 					String selected = (String) ctgList.getSelectedValue();
 					boolean sucess = Category.removeCategory(selected);
-					if (sucess == true){
+					if (sucess == true) {
 						updateCategory();
 					}
 				}
-								
+
 			}
 		});
 		ctg_Delete.setBounds(697, 159, 97, 53);
 		frame.getContentPane().add(ctg_Delete);
-		
+
 		JButton good_Eroll = new JButton("\uC0C1\uD488\uB4F1\uB85D\r\n");
 		good_Eroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ErollGoods();
-				//상품 리스트 업데이트
+				// 상품 리스트 업데이트
 			}
 		});
 		good_Eroll.setBounds(455, 250, 97, 53);
 		frame.getContentPane().add(good_Eroll);
-		
+
 		JButton good_Correct = new JButton("\uC0C1\uD488\uC218\uC815");
 		good_Correct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = table.getSelectedRow();
 				String value = null;
-				if(index != -1){
-					value = (String)dtm.getValueAt(index, 0);
+				if (index != -1) {
+					value = (String) dtm.getValueAt(index, 0);
 				}
 				new CorrectGoods(value);
-				 
+
 			}
 		});
 		good_Correct.setBounds(577, 250, 97, 53);
 		frame.getContentPane().add(good_Correct);
-		
+
 		JButton good_Delete = new JButton("\uC0C1\uD488\uC0AD\uC81C");
 		good_Delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = table.getSelectedRow();
 				String value = null;
-				if(index != -1){
-					value = (String)dtm.getValueAt(index, 0);
+				if (index != -1) {
+					value = (String) dtm.getValueAt(index, 0);
 				}
-				if (Goods.removeGoods(value)){
+				if (Goods.removeGoods(value)) {
 					dtm.removeRow(index);
 				}
 			}
 		});
 		good_Delete.setBounds(697, 250, 97, 53);
 		frame.getContentPane().add(good_Delete);
-		
+
 		JButton ok = new JButton("\uD655\uC778");
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -165,25 +166,25 @@ public class ManageGoods {
 		ok.setBounds(577, 342, 97, 37);
 		frame.getContentPane().add(ok);
 	}
-	
-	public static void updateCategory(){
+
+	public static void updateCategory() {
 		categoryList = Category.getCategoryList();
 		ctgdata = new String[categoryList.length];
-		for(int i=0; i<categoryList.length; i++){
+		for (int i = 0; i < categoryList.length; i++) {
 			ctgdata[i] = categoryList[i].getCategoryName();
 		}
 		dlm = new DefaultListModel<String>();
-		for(String s:ctgdata){
+		for (String s : ctgdata) {
 			dlm.addElement(s);
 		}
 		ctgList.setModel(dlm);
 		ctgList.updateUI();
 	}
-	
-	public static void updateGoods(String ctgName){
+
+	public static void updateGoods(String ctgName) {
 		goods = new String[40][4];
 		goodsList = Goods.getGoodsList(ctgName);
-		for(int j=0; j<goodsList.length; j++){
+		for (int j = 0; j < goodsList.length; j++) {
 			goods[j][0] = goodsList[j].getGoodsName();
 			goods[j][1] = Integer.toString(goodsList[j].getPrice());
 			goods[j][2] = Integer.toString(goodsList[j].getStockAmount());

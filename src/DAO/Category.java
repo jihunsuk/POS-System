@@ -22,10 +22,10 @@ public class Category {
 		boolean result = false;
 
 		// 예외 흐름 E1
-		if(CATEGORY_NAME.equals("")){
+		if (CATEGORY_NAME.equals("")) {
 			return false;
 		}
-		
+
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
@@ -50,20 +50,20 @@ public class Category {
 		boolean result = false;
 
 		// 예외 흐름 E1
-		if(CATEGORY_NAME.equals("")){
+		if (CATEGORY_NAME.equals("")) {
 			return false;
 		}
-		
+
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
 			String query = String.format("delete from category where CategoryName='%s'", CATEGORY_NAME);
 			stmt.executeUpdate(query);
-			
+
 			query = String.format("delete from goods where CategoryName='%s'", CATEGORY_NAME);
 			stmt.executeUpdate(query);
-			
+
 			System.out.println("카테고리 삭제에 성공했습니다.");
 			result = true;
 			stmt.close();
@@ -81,20 +81,22 @@ public class Category {
 		boolean result = false;
 
 		// 예외 흐름 E1
-		if(PREV_CATEGORY_NAME == null){
+		if (PREV_CATEGORY_NAME == null) {
 			return false;
 		}
-		
+
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
 
-			String query = String.format("update category set categoryname = '%s' where categoryname = '%s'", CATEGORY_NAME, PREV_CATEGORY_NAME);
+			String query = String.format("update category set categoryname = '%s' where categoryname = '%s'",
+					CATEGORY_NAME, PREV_CATEGORY_NAME);
 			stmt.executeUpdate(query);
 
-			query = String.format("update goods set CategoryName='%s' where categoryname = '%s'", CATEGORY_NAME, PREV_CATEGORY_NAME);
+			query = String.format("update goods set CategoryName='%s' where categoryname = '%s'", CATEGORY_NAME,
+					PREV_CATEGORY_NAME);
 			stmt.executeUpdate(query);
-			
+
 			System.out.println("카테고리 수정에 성공했습니다.");
 			result = true;
 			stmt.close();
@@ -110,7 +112,7 @@ public class Category {
 		Connection c = null;
 		Statement stmt = null;
 		Category[] categoryList = null;
-		
+
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
@@ -122,7 +124,7 @@ public class Category {
 			while (rs.next()) {
 				temp.add(new Category(rs.getString("CategoryName")));
 			}
-			
+
 			categoryList = temp.toArray(new Category[0]);
 			System.out.println("카테고리조회에 성공했습니다.");
 		} catch (SQLException e) {

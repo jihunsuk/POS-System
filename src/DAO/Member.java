@@ -55,7 +55,7 @@ public class Member {
 			this.Age = rs.getString("AGE");
 			this.PhoneNumber = rs.getString("PHONENUMBER");
 			System.out.println("로그인에 성공했습니다.");
-			
+
 			result = SUCCESS;
 		} catch (SQLException e) {
 			System.out.println("로그인에 실패했습니다.");
@@ -75,10 +75,10 @@ public class Member {
 		int result = -1;
 
 		// 예외흐름 E2
-		if(ID.equals("") || PWD.equals("") || NAME.equals("") || AGE.equals("") || PHONENUMBER.equals("")){
+		if (ID.equals("") || PWD.equals("") || NAME.equals("") || AGE.equals("") || PHONENUMBER.equals("")) {
 			return E2;
 		}
-		
+
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();

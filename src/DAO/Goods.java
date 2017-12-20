@@ -23,17 +23,18 @@ public class Goods {
 		this.Category = Category;
 	}
 
-	public static boolean addGoods(final String goodsName, final String price, final String stockAmount, final String discount,
-			final String categoryName) {
+	public static boolean addGoods(final String goodsName, final String price, final String stockAmount,
+			final String discount, final String categoryName) {
 		Connection c = null;
 		Statement stmt = null;
 		boolean result = false;
 
 		// øπø‹ »Â∏ß E1
-		if(goodsName.equals("") || price.equals("") || stockAmount.equals("") || discount.equals("") || categoryName.equals("")){
+		if (goodsName.equals("") || price.equals("") || stockAmount.equals("") || discount.equals("")
+				|| categoryName.equals("")) {
 			return false;
 		}
-		
+
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
@@ -58,20 +59,21 @@ public class Goods {
 		final int SUCCESS = 0;
 		final int E1 = 1;
 		final int E2 = 2;
-		
+
 		Connection c = null;
 		Statement stmt = null;
 		int result = -1;
 
 		// øπø‹ »Â∏ß E1
-		if(prev_goodsName == null){
+		if (prev_goodsName == null) {
 			return E1;
 		}
 		// øπø‹ »Â∏ß E2
-		if(goodsName.equals("") || price.equals("") || stockAmount.equals("") || discount.equals("") || categoryName.equals("")){
+		if (goodsName.equals("") || price.equals("") || stockAmount.equals("") || discount.equals("")
+				|| categoryName.equals("")) {
 			return E2;
 		}
-		
+
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();
@@ -98,10 +100,10 @@ public class Goods {
 		boolean result = false;
 
 		// øπø‹ »Â∏ß E1
-		if(goodsName == null){
+		if (goodsName == null) {
 			return false;
 		}
-		
+
 		try {
 			c = DBConnection.getConnection();
 			stmt = c.createStatement();

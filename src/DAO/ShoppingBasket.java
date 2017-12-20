@@ -68,7 +68,6 @@ public class ShoppingBasket {
 
 				TotalPrice += p;
 				result = true;
-				// TODO: GUI에서 result = true이면 totalprice변경
 			}
 
 			System.out.println("장바구니상품담기에 성공했습니다.");
@@ -106,7 +105,6 @@ public class ShoppingBasket {
 						TotalPrice -= amount * g.getPrice();
 						result = true;
 						break;
-						// TODO: GUI에서 result = true이면 totalprice변경
 					}
 				}
 			}
@@ -148,9 +146,6 @@ public class ShoppingBasket {
 		Change = change;
 	}
 
-	// TODO: GUI에서 ShoppingBasket s일때
-	// s.getPayment().doCreditPay(s.getReceiveMoney());
-	// s.getPayment().doCashPay(s.getReceiveMoney(), s.getChange());
 	public Payment getPayment() {
 		if (this.payment == null) {
 			payment = new Payment();
@@ -161,7 +156,7 @@ public class ShoppingBasket {
 	public List<Goods> getGoodsList() {
 		return goodsList;
 	}
-	
+
 	public void setGoodsList(List<Goods> goodsList) {
 		this.goodsList = goodsList;
 	}

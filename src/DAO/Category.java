@@ -60,7 +60,10 @@ public class Category {
 
 			String query = String.format("delete from category where CategoryName='%s'", CATEGORY_NAME);
 			stmt.executeUpdate(query);
-
+			
+			query = String.format("delete from goods where CategoryName='%s'", CATEGORY_NAME);
+			stmt.executeUpdate(query);
+			
 			System.out.println("카테고리 삭제에 성공했습니다.");
 			result = true;
 			stmt.close();
@@ -89,6 +92,9 @@ public class Category {
 			String query = String.format("update category set categoryname = '%s' where categoryname = '%s'", CATEGORY_NAME, PREV_CATEGORY_NAME);
 			stmt.executeUpdate(query);
 
+			query = String.format("update goods set CategoryName='%s' where categoryname = '%s'", CATEGORY_NAME, PREV_CATEGORY_NAME);
+			stmt.executeUpdate(query);
+			
 			System.out.println("카테고리 수정에 성공했습니다.");
 			result = true;
 			stmt.close();

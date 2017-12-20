@@ -73,7 +73,7 @@ public class ManageGoods {
 		
 		table.setBounds(172, 48, 271, 492);
 		
-		JButton ctg_Eroll = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp\uB4F1\uB85D</html>");
+		JButton ctg_Eroll = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp&nbsp&nbsp\uB4F1\uB85D</html>");
 		ctg_Eroll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ErollCategory();
@@ -82,7 +82,7 @@ public class ManageGoods {
 		ctg_Eroll.setBounds(455, 159, 97, 53);
 		frame.getContentPane().add(ctg_Eroll);
 		
-		JButton ctg_Corret = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp\uC218\uC815</html>");
+		JButton ctg_Corret = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp&nbsp&nbsp\uC218\uC815</html>");
 		ctg_Corret.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -94,7 +94,7 @@ public class ManageGoods {
 		ctg_Corret.setBounds(577, 159, 97, 53);
 		frame.getContentPane().add(ctg_Corret);
 		
-		JButton ctg_Delete = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp\uC0AD\uC81C</html>;");
+		JButton ctg_Delete = new JButton("<html>\uCE74\uD14C\uACE0\uB9AC<br>&nbsp&nbsp&nbsp&nbsp\uC0AD\uC81C</html>;");
 		ctg_Delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 

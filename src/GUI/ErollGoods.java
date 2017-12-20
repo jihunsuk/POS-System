@@ -35,7 +35,7 @@ public class ErollGoods {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setVisible(true);
-		frame.setTitle("\uC0C1\uD488\uC218\uC815");
+		frame.setTitle("\uC0C1\uD488\uB4F1\uB85D");
 		frame.setBounds(100, 100, 455, 305);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -62,12 +62,12 @@ public class ErollGoods {
 		
 		JLabel label_2 = new JLabel("\uC7AC\uACE0\uC218\uB7C9");
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setBounds(64, 165, 57, 15);
+		label_2.setBounds(64, 161, 57, 15);
 		frame.getContentPane().add(label_2);
 		
 		JLabel label_3 = new JLabel("\uCE74\uD14C\uACE0\uB9AC");
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		label_3.setBounds(64, 194, 57, 15);
+		label_3.setBounds(64, 192, 57, 15);
 		frame.getContentPane().add(label_3);
 		
 		goodName = new JTextField();
@@ -87,12 +87,12 @@ public class ErollGoods {
 		
 		stockAmount = new JTextField();
 		stockAmount.setColumns(10);
-		stockAmount.setBounds(133, 162, 191, 21);
+		stockAmount.setBounds(133, 158, 191, 21);
 		frame.getContentPane().add(stockAmount);
 		
 		ctgName = new JTextField();
 		ctgName.setColumns(10);
-		ctgName.setBounds(133, 191, 191, 21);
+		ctgName.setBounds(133, 189, 191, 21);
 		frame.getContentPane().add(ctgName);
 		
 		JButton save = new JButton("\uC800\uC7A5");
@@ -108,7 +108,7 @@ public class ErollGoods {
 				
 			}
 		});
-		save.setBounds(105, 233, 97, 23);
+		save.setBounds(95, 220, 97, 23);
 		frame.getContentPane().add(save);
 		
 		JButton cancle = new JButton("\uCDE8\uC18C");
@@ -117,8 +117,7 @@ public class ErollGoods {
 				frame.setVisible(false);
 			}
 		});
-		cancle.setBounds(246, 233, 97, 23);
+		cancle.setBounds(238, 220, 97, 23);
 		frame.getContentPane().add(cancle);
 	}
-
 }

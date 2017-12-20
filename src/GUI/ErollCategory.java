@@ -41,7 +41,7 @@ public class ErollCategory {
 		frame.getContentPane().add(label);
 		
 		JLabel lblNewLabel = new JLabel("\uCE74\uD14C\uACE0\uB9AC\uBA85");
-		lblNewLabel.setBounds(60, 90, 60, 15);
+		lblNewLabel.setBounds(61, 90, 70, 15);
 		frame.getContentPane().add(lblNewLabel);
 		
 		ctgName = new JTextField();

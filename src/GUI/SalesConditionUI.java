@@ -69,7 +69,7 @@ public class SalesConditionUI {
 				updateSales(DAY);
 			}
 		});
-		sales_for_day.setBounds(99, 235, 97, 23);
+		sales_for_day.setBounds(99, 235, 115, 23);
 		frame.getContentPane().add(sales_for_day);
 
 		JButton sales_for_month = new JButton("\uC6D4\uB9E4\uCD9C\uD604\uD669");
@@ -79,7 +79,7 @@ public class SalesConditionUI {
 				updateSales(MONTH);
 			}
 		});
-		sales_for_month.setBounds(360, 235, 97, 23);
+		sales_for_month.setBounds(347, 235, 115, 23);
 		frame.getContentPane().add(sales_for_month);
 
 		JButton back = new JButton("\uB4A4\uB85C\uAC00\uAE30");

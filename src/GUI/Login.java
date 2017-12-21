@@ -12,13 +12,14 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import DAO.Member;
+import javax.swing.JPasswordField;
 
 public class Login {
 	Member m;
 
 	private JFrame frame;
 	private JTextField ID;
-	private JTextField PWD;
+	private JPasswordField PWD;
 
 	/**
 	 * Launch the application.
@@ -89,11 +90,6 @@ public class Login {
 		frame.getContentPane().add(ID);
 		ID.setColumns(10);
 
-		PWD = new JTextField();
-		PWD.setBounds(174, 102, 116, 21);
-		frame.getContentPane().add(PWD);
-		PWD.setColumns(10);
-
 		JLabel lblNewLabel = new JLabel("\uB85C\uADF8\uC778");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(96, 72, 66, 18);
@@ -108,5 +104,9 @@ public class Login {
 		lblNewLabel_2.setFont(new Font("배달의민족 도현", Font.BOLD, 18));
 		lblNewLabel_2.setBounds(126, 20, 138, 38);
 		frame.getContentPane().add(lblNewLabel_2);
+		
+		PWD = new JPasswordField();
+		PWD.setBounds(174, 102, 116, 21);
+		frame.getContentPane().add(PWD);
 	}
 }
